@@ -1,4 +1,28 @@
-/* Utilities */
+/* 
+***
+* Styles
+***
+* Utilities
+* Color mode
+* Header
+* Work
+* About
+*
+*/
+
+/* 
+*
+* Utilities
+*
+*/
+
+
+body {
+    margin: 0;
+    font-family: 'Inter';
+    background-color: #00C3B7;
+}
+
 button {
     border: none;
     background: none;
@@ -6,7 +30,6 @@ button {
 
 h1, h2, h3, p, a {
     text-decoration: none;
-    margin: 0;
     color: inherit;
 }
 
@@ -24,7 +47,11 @@ h1, h2, h3, p, a {
     border-bottom: 1px solid #00C3B7;
 }
 
-/* Color mode */
+/* 
+*
+* Color mode
+*
+*/
 
 .dark {
     background-color: #15181A;
@@ -32,14 +59,6 @@ h1, h2, h3, p, a {
 
 .light {
     background-color: #F1ECE2;
-}
-
-/* Styles */
-
-body {
-    margin: 0;
-    font-family: 'Inter';
-    background-color: #00C3B7;
 }
 
 .body-dark {
@@ -52,13 +71,16 @@ body {
     border-color: #15181A;
 }
 
-/* NAVIGATION */
+/* 
+*
+* Navigation
+*
+*/
 
 #navigation {
     position: fixed;
     top: 0;
     z-index: 10;
-    /*border-bottom: 1px solid;*/
     width: 80%;
     padding: 3vh 10% 3vh 10%;
     display: flex;
@@ -123,7 +145,11 @@ body {
     opacity: 100%;
 }
 
-/* HEADER */
+/* 
+*
+* Header
+*
+*/
 
 header {
     height: 100vh;
@@ -178,7 +204,11 @@ header {
     bottom: 0;
 }
 
-/* PROJECTS */
+/* 
+*
+* Work
+*
+*/
 
 #work {
     padding: 30% 10% 6% 10%;
@@ -284,7 +314,11 @@ header {
     color: #15181A;
 }
 
-/* ABOUT */
+/* 
+*
+* ABOUT
+*
+*/
 
 #about {
     padding: 8% 10% 6% 10%;
@@ -296,8 +330,11 @@ header {
     }
 }
 
-.about-desc {
-    margin: auto;
+#about-me {
+    display: flex;
+}
+
+#about-desc {
     margin-bottom: 10%;
     font-size: 1.2rem;
     font-weight: 200;
@@ -307,17 +344,18 @@ header {
     margin: 64px 0 24px 0;
     font-weight: 600;
     font-size: 2rem;
+    font-style: italic;
 }
 
 .xp-bloc {
     margin: auto;
+    margin-bottom: 16px;
     width: 100%;
 }
 
 .xp-line {
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
     padding-bottom: 10px;
     transition: border 250ms ease-in-out;
     cursor: pointer;
@@ -366,7 +404,11 @@ header {
 
 .xp-desc {
     display: none;
-    margin: 10px 0 20px 0;
+    margin: 8px 0 20px 0;
     font-size: 0.8rem;
     font-weight: 300;
+}
+
+.xp-desc:hover {
+    display: block;
 }
