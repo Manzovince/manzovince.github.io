@@ -6,6 +6,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matc
     colorMode('dark');
 }
 
+// Set color theme
 function colorMode(color) {
     if (color == "dark") {
         document.getElementById('color-mode').setAttribute( "onClick", "javascript: colorMode('light');");
@@ -40,6 +41,7 @@ function colorMode(color) {
     }
 }
 
+// Toggle
 function toggle(element) {
     console.log(document.getElementById(element).innerText);
     if (document.getElementById(element).display == 'block') {

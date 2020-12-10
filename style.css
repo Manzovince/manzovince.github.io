@@ -16,7 +16,6 @@
 *
 */
 
-
 body {
     margin: 0;
     font-family: 'Inter';
@@ -30,6 +29,7 @@ button {
 
 h1, h2, h3, p, a {
     text-decoration: none;
+    margin: 0;
     color: inherit;
 }
 
@@ -244,6 +244,11 @@ header {
     }
 }
 
+.project-bloc a {
+    position: absolute;
+    height: 100%;
+}
+
 .project-title {
     font-size: 1.6rem;
     margin-bottom: 0.8rem;
@@ -334,14 +339,14 @@ header {
     display: flex;
 }
 
-#about-desc {
-    margin-bottom: 10%;
+.about-desc {
+    margin-bottom: 32px;
     font-size: 1.2rem;
     font-weight: 200;
 }
 
 .about-title {
-    margin: 64px 0 24px 0;
+    margin: 64px 0 32px 0;
     font-weight: 600;
     font-size: 2rem;
     font-style: italic;
