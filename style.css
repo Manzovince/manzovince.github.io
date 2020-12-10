@@ -4,14 +4,14 @@ button {
     background: none;
 }
 
-.hidden {
-    display: none;
-}
-
 h1, h2, h3, p, a {
     text-decoration: none;
     margin: 0;
     color: inherit;
+}
+
+.hidden {
+    display: none;
 }
 
 .pattern-dots {
@@ -20,16 +20,18 @@ h1, h2, h3, p, a {
     height: 100%;
 }
 
+.highlight {
+    border-bottom: 1px solid #00C3B7;
+}
+
+/* Color mode */
+
 .dark {
     background-color: #15181A;
 }
 
 .light {
     background-color: #F1ECE2;
-}
-
-.highlight {
-    border-bottom: 1px solid #00C3B7;
 }
 
 /* Styles */
@@ -68,6 +70,7 @@ body {
 
 .nav-btn {
     margin-right: 24px;
+    padding: 3px;
     font-weight: 300;
     cursor: pointer;
     transition: border 250ms;
@@ -85,7 +88,6 @@ body {
 
 .nav-btn:hover {
     border-top: 1px solid;
-    border-bottom: 1px solid;
 }
 
 .nav-active {
@@ -96,6 +98,11 @@ body {
     height: 50px;
     width: 50px;
     opacity: 50%;
+    transition: opacity 250ms ease-in-out;
+}
+
+#logo:hover {
+    opacity: 100%;
 }
 
 #home-btn {
@@ -192,9 +199,8 @@ header {
 }
 
 .project-bloc {
-    position: relative;
     padding: 24px;
-    border-radius: 3px;
+    border-radius: 6px;
     height: 50vh;
     margin-bottom: 4vw;
     background-color: #303538;
@@ -204,7 +210,6 @@ header {
     .project-bloc {
         display: block;
         height: 20vw;
-        border-radius: 3px;
         margin-bottom: 0;
     }
 }
@@ -220,46 +225,26 @@ header {
 
 #p1 {
     grid-area: p1;
-    background: #20D78B;
-    background: -webkit-radial-gradient(top left, #20D78B, #D70939);
-    background: -moz-radial-gradient(top left, #20D78B, #D70939);
-    background: radial-gradient(to bottom right, #20D78B, #D70939);
-    color: #15181A;
+    color: inherit;
 }
 
 #p2 {
     grid-area: p2;
-    background: #3745FB;
-    background: -webkit-radial-gradient(top left, #3745FB, #64D997);
-    background: -moz-radial-gradient(top left, #3745FB, #64D997);
-    background: radial-gradient(to bottom right, #3745FB, #64D997);
-    color: #15181A;
+    color: inherit;
 }
 
 #p3 {
     grid-area: p3;
-    background: #5A6641;
-    background: -webkit-radial-gradient(top left, #5A6641, #4F4956);
-    background: -moz-radial-gradient(top left, #5A6641, #4F4956);
-    background: radial-gradient(to bottom right, #5A6641, #4F4956);
-    color: #15181A;
+    color: inherit;
 }
 
 #p4 {
     grid-area: p4;
-    background: #7D7FBE;
-    background: -webkit-radial-gradient(top left, #7D7FBE, #D10847);
-    background: -moz-radial-gradient(top left, #7D7FBE, #D10847);
-    background: radial-gradient(to bottom right, #7D7FBE, #D10847);
-    color: #15181A;
+    color: inherit;
 }
 
 #p5 {
     grid-area: p5;
-    background: #7D6B3F;
-    background: -webkit-radial-gradient(top left, #7D6B3F, #8B1D48);
-    background: -moz-radial-gradient(top left, #7D6B3F, #8B1D48);
-    background: radial-gradient(to bottom right, #7D6B3F, #8B1D48);
     color: inherit;
 }
 
@@ -269,7 +254,7 @@ header {
     background: -webkit-radial-gradient(top left, #D0116B, #382D1B);
     background: -moz-radial-gradient(top left, #D0116B, #382D1B);
     background: radial-gradient(to bottom right, #D0116B, #382D1B);
-    color: inherit;
+    color: #F1ECE2;
 }
 
 #p7 {
@@ -278,7 +263,7 @@ header {
     background: -webkit-radial-gradient(top left, #1765FB, #4B4347);
     background: -moz-radial-gradient(top left, #1765FB, #4B4347);
     background: radial-gradient(to bottom right, #1765FB, #4B4347);
-    color: inherit;
+    color: #F1ECE2;
 }
 
 #p8 {
@@ -287,7 +272,7 @@ header {
     background: -webkit-radial-gradient(top left, #0A2808, #4B38A3);
     background: -moz-radial-gradient(top left, #0A2808, #4B38A3);
     background: radial-gradient(to bottom right, #0A2808, #4B38A3);
-    color: inherit;
+    color: #F1ECE2;
 }
 
 #p9 {
@@ -296,44 +281,38 @@ header {
     background: -webkit-radial-gradient(top left, #F3A161, #BC2896);
     background: -moz-radial-gradient(top left, #F3A161, #BC2896);
     background: radial-gradient(to bottom right, #F3A161, #BC2896);
-    color: inherit;
+    color: #15181A;
 }
 
 /* ABOUT */
 
 #about {
-    min-height: 100vh;
     padding: 8% 10% 6% 10%;
 }
 
+@media only screen and (min-width: 768px) {
+    #about {
+        padding: 8% 20% 6% 20%;
+    }
+}
+
 .about-desc {
-    width: 100%;
     margin: auto;
     margin-bottom: 10%;
-    font-size: 1rem;
-    font-weight: 300;
+    font-size: 1.2rem;
+    font-weight: 200;
 }
 
 .about-title {
     margin: 64px 0 24px 0;
     font-weight: 600;
-    text-align: center;
+    font-size: 2rem;
 }
 
 .xp-bloc {
     margin: auto;
     width: 100%;
 }
-
-@media only screen and (min-width: 768px) {
-    .about-desc {
-        width: 60%;
-    }
-    .xp-bloc {
-        width: 60%;
-    }
-}
-
 
 .xp-line {
     display: flex;

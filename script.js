@@ -6,9 +6,6 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matc
     colorMode('dark');
 }
 
-// Navigation
-var page = "home";
-
 function colorMode(color) {
     if (color == "dark") {
         document.getElementById('color-mode').setAttribute( "onClick", "javascript: colorMode('light');");
@@ -41,25 +38,6 @@ function colorMode(color) {
             
         }
     }
-}
-
-function pageControl(page) {
-    if (page == 'home') {
-        document.getElementById('home-btn').classList.add('nav-active');
-        document.getElementById('about-btn').classList.remove('nav-active');
-    }
-    if (page == 'about') {
-        document.getElementById('about-btn').classList.add('nav-active');
-        document.getElementById('home-btn').classList.remove('nav-active');
-    }
-}
-
-navHandler('page1');
-function navHandler(page) {
-    document.getElementById('home').style.display = 'none';
-    document.getElementById('about').style.display = 'none';
-    document.getElementById(page).style.display = 'block';
-    window.scrollTo(0,0);
 }
 
 function toggle(element) {
