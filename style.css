@@ -105,6 +105,8 @@ body {
 #color-mode {
     cursor: alias;
     opacity: 70%;
+    padding: 6px;
+    border-radius: 6px;
     transition: opacity 250ms ease-in-out;
 }
 
