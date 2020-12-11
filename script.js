@@ -59,12 +59,9 @@ function checkVisible(id) {
 
 // Toggle
 function toggle(element) {
-    console.log(document.getElementById(element).innerText);
     if (document.getElementById(element).display == 'block') {
         document.getElementById(element).display = 'none';
-        console.log(document.getElementById(element).display);
     } else {
         document.getElementById(element).display = 'block';
-        console.log(document.getElementById(element).display);
     }
 }
