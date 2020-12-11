@@ -18,6 +18,7 @@ function colorMode(color) {
         document.getElementById('header').className = 'dark';
         document.getElementById('work').className = 'dark';
         document.getElementById('about').className = 'dark';
+        document.getElementsByTagName('footer')[0].className = 'dark';
         for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
             document.getElementsByClassName('xp-line')[i].classList.remove('xp-light');
             document.getElementsByClassName('xp-line')[i].classList.add('xp-dark');
@@ -33,6 +34,7 @@ function colorMode(color) {
         document.getElementById('header').className = 'light';
         document.getElementById('work').className = 'light';
         document.getElementById('about').className = 'light';
+        document.getElementsByTagName('footer')[0].className = 'light';
         for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
             document.getElementsByClassName('xp-line')[i].classList.remove('xp-dark');
             document.getElementsByClassName('xp-line')[i].classList.add('xp-light');;
@@ -40,6 +42,20 @@ function colorMode(color) {
         }
     }
 }
+
+// Navigation follower
+window.onscroll = function() {
+    document.getElementById('work-btn').style.borderBottom = checkVisible('work') ? 'solid 1px' : '';
+    document.getElementById('about-btn').style.borderBottom = checkVisible('about') ? 'solid 1px' : '';
+};
+
+function checkVisible(id) {
+    var el = document.getElementById(id);
+    var rect = el.getBoundingClientRect();
+    var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+    return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
+
 
 // Toggle
 function toggle(element) {
