@@ -18,6 +18,7 @@ function colorMode(color) {
         document.getElementById('header').className = 'dark';
         document.getElementById('work').className = 'dark';
         document.getElementById('about').className = 'dark';
+        document.getElementById('quote').className = 'dark';
         document.getElementsByTagName('footer')[0].className = 'dark';
         for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
             document.getElementsByClassName('xp-line')[i].classList.remove('xp-light');
@@ -34,6 +35,7 @@ function colorMode(color) {
         document.getElementById('header').className = 'light';
         document.getElementById('work').className = 'light';
         document.getElementById('about').className = 'light';
+        document.getElementById('quote').className = 'light';
         document.getElementsByTagName('footer')[0].className = 'light';
         for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
             document.getElementsByClassName('xp-line')[i].classList.remove('xp-dark');

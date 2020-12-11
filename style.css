@@ -200,6 +200,7 @@ header {
 
 #illu {
     display: none;
+    overflow: hidden;
 }
 
 @media only screen and (min-width: 768px) {
@@ -211,6 +212,66 @@ header {
         right: 0;
         bottom: 0;
     }
+}
+
+@keyframes spin3D {
+    from {
+      transform: rotate3d(.5,.5,.5, 360deg);
+    }
+    to{
+      transform: rotate3d(0deg);
+    }
+}
+
+.spinner {
+    position: absolute;
+    right: 10%;
+    top: 30%;
+    width: 50vh;
+	height: 50vh;
+    border: 1px solid gray;
+    border-radius: 100%;
+    -webkit-animation: spin3D 20s linear 1s infinite;
+}
+
+@keyframes spin3D-1 {
+    from {
+      transform: rotate3d(.2,1,.1, 360deg);
+    }
+    to{
+      transform: rotate3d(0deg);
+    }
+}
+
+.spinner-1 {
+    position: absolute;
+    right: 17%;
+    top: 35%;
+    width: 40vh;
+	height: 40vh;
+    border: 1px dashed gray;
+    border-radius: 100%;
+    -webkit-animation: spin3D-1 18s linear 1s infinite;
+}
+
+@keyframes spin3D-2 {
+    from {
+      transform: rotate3d(.8,.1,.5, 360deg);
+    }
+    to{
+      transform: rotate3d(0deg);
+    }
+}
+
+.spinner-2 {
+    position: absolute;
+    right: 24%;
+    top: 40%;
+    width: 30vh;
+	height: 30vh;
+    border: 1px solid gray;
+    border-radius: 100%;
+    -webkit-animation: spin3D-2 16s linear 1s infinite;
 }
 
 /* 
@@ -380,6 +441,10 @@ header {
     margin-bottom: 32px;
     font-size: 1rem;
     font-weight: 300;
+    line-height: 1.5rem;
+    border-left: solid 1px rgba(128, 128, 128, 0.6);
+    margin-left: 0.5vw;
+    padding-left: 2vw;
 }
 
 .xp-bloc {
@@ -444,8 +509,17 @@ header {
     font-weight: 300;
 }
 
-.xp-desc:hover {
-    display: block;
+/* 
+*
+* Quote
+*
+*/
+
+#quote {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 100;
+    font-style: italic;
 }
 
 /* 
@@ -477,4 +551,10 @@ footer div {
 #music {
     cursor: pointer;
     color: coral;
+    opacity: 0.7;
+    transition: opacity 250ms ease-in-out;
+}
+
+#music:hover {
+    opacity: 1;
 }

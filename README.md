@@ -1,3 +1,3 @@
-# Manzovince.github.io
+# manzovince.github.io
 
 A personal website.
