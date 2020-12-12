@@ -236,6 +236,7 @@ header {
 	height: 50vh;
     border: 1px solid gray;
     border-radius: 100%;
+    animation: spin3D-1 20s linear 1s infinite;
     -webkit-animation: spin3D-1 20s linear 1s infinite;
 }
 
@@ -256,6 +257,7 @@ header {
 	height: 40vh;
     border: 1px dashed gray;
     border-radius: 100%;
+    animation: spin3D-1 15s linear 1s infinite;
     -webkit-animation: spin3D-1 15s linear 1s infinite;
 }
 
@@ -276,6 +278,7 @@ header {
 	height: 30vh;
     border: 1px solid gray;
     border-radius: 100%;
+    animation: spin3D-2 10s linear 1s infinite;
     -webkit-animation: spin3D-2 10s linear 1s infinite;
 }
 
