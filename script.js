@@ -15,11 +15,15 @@ function colorMode(color) {
         document.getElementById('logo').setAttribute('src', './assets/vm-logo.svg')
         document.getElementById('page').className = 'body-dark';
         document.getElementById('navigation').className = 'nav-dark';
-        document.getElementById('header').className = 'dark';
-        document.getElementById('work').className = 'dark';
-        document.getElementById('about').className = 'dark';
-        document.getElementById('quote').className = 'dark';
+        if (document.getElementById('header')) {
+            document.getElementById('header').className = 'dark';
+            document.getElementById('work').className = 'dark';
+            document.getElementById('about').className = 'dark';
+        }
         document.getElementsByTagName('footer')[0].className = 'dark';
+        if (document.getElementById('project')) {
+            document.getElementById('project').className = 'dark';
+        }
         for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
             document.getElementsByClassName('xp-line')[i].classList.remove('xp-light');
             document.getElementsByClassName('xp-line')[i].classList.add('xp-dark');
@@ -32,11 +36,15 @@ function colorMode(color) {
         document.getElementById('logo').setAttribute('src', './assets/vm-logo-black.svg')
         document.getElementById('page').className = 'body-light';
         document.getElementById('navigation').className = 'nav-light';
-        document.getElementById('header').className = 'light';
-        document.getElementById('work').className = 'light';
-        document.getElementById('about').className = 'light';
-        document.getElementById('quote').className = 'light';
+        if (document.getElementById('header')) {
+            document.getElementById('header').className = 'light';
+            document.getElementById('work').className = 'light';
+            document.getElementById('about').className = 'light';
+        }
         document.getElementsByTagName('footer')[0].className = 'light';
+        if (document.getElementById('project')) {
+            document.getElementById('project').className = 'light';
+        }
         for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
             document.getElementsByClassName('xp-line')[i].classList.remove('xp-dark');
             document.getElementsByClassName('xp-line')[i].classList.add('xp-light');;
@@ -60,10 +68,10 @@ function checkVisible(id) {
 
 
 // Toggle
-function toggle(element) {
-    if (document.getElementById(element).display == 'block') {
-        document.getElementById(element).display = 'none';
+function toggle(el) {
+    if (document.getElementById(el).style.display == 'block') {
+        document.getElementById(el).style.display = 'none';
     } else {
-        document.getElementById(element).display = 'block';
+        document.getElementById(el).style.display = 'block';
     }
 }
