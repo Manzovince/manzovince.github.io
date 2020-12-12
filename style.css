@@ -84,7 +84,7 @@ h1, h2, h3, p, a {
     z-index: 10;
     width: 80%;
     padding: 3vh 10% 3vh 10%;
-    border-bottom: solid 1px rgba(128, 128, 128, 0.4);
+    border-bottom: solid 1px rgba(128, 128, 128, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -198,9 +198,14 @@ header {
     font-weight: 200;
 }
 
+/*
+*
+* Illustration
+*
+*/
+
 #illu {
     display: none;
-    overflow: hidden;
 }
 
 @media only screen and (min-width: 768px) {
@@ -214,7 +219,7 @@ header {
     }
 }
 
-@keyframes spin3D {
+@keyframes spin3D-1 {
     from {
       transform: rotate3d(.5,.5,.5, 360deg);
     }
@@ -223,7 +228,7 @@ header {
     }
 }
 
-.spinner {
+.spinner-1 {
     position: absolute;
     right: 10%;
     top: 30%;
@@ -231,32 +236,12 @@ header {
 	height: 50vh;
     border: 1px solid gray;
     border-radius: 100%;
-    -webkit-animation: spin3D 20s linear 1s infinite;
-}
-
-@keyframes spin3D-1 {
-    from {
-      transform: rotate3d(.2,1,.1, 360deg);
-    }
-    to{
-      transform: rotate3d(0deg);
-    }
-}
-
-.spinner-1 {
-    position: absolute;
-    right: 17%;
-    top: 35%;
-    width: 40vh;
-	height: 40vh;
-    border: 1px dashed gray;
-    border-radius: 100%;
-    -webkit-animation: spin3D-1 18s linear 1s infinite;
+    -webkit-animation: spin3D-1 20s linear 1s infinite;
 }
 
 @keyframes spin3D-2 {
     from {
-      transform: rotate3d(.8,.1,.5, 360deg);
+      transform: rotate3d(.5,1,0, 360deg);
     }
     to{
       transform: rotate3d(0deg);
@@ -265,13 +250,33 @@ header {
 
 .spinner-2 {
     position: absolute;
+    right: 17%;
+    top: 35%;
+    width: 40vh;
+	height: 40vh;
+    border: 1px dashed gray;
+    border-radius: 100%;
+    -webkit-animation: spin3D-1 15s linear 1s infinite;
+}
+
+@keyframes spin3D-3 {
+    from {
+      transform: rotate3d(.8,.1,.5, 360deg);
+    }
+    to{
+      transform: rotate3d(0deg);
+    }
+}
+
+.spinner-3 {
+    position: absolute;
     right: 24%;
     top: 40%;
     width: 30vh;
 	height: 30vh;
     border: 1px solid gray;
     border-radius: 100%;
-    -webkit-animation: spin3D-2 16s linear 1s infinite;
+    -webkit-animation: spin3D-2 10s linear 1s infinite;
 }
 
 /* 
@@ -306,7 +311,7 @@ header {
     border-radius: 6px;
     height: 50vh;
     margin-bottom: 4vw;
-    opacity: 80%;
+    opacity: 75%;
     transition: opacity 250ms ease-in-out;
 }
 
@@ -364,11 +369,9 @@ header {
 
 #p4 {
     grid-area: p4;
-    background: #35B297;
-    background: -webkit-radial-gradient(top left, #35B297, #260F08);
-    background: -moz-radial-gradient(top left, #35B297, #260F08);
-    background: radial-gradient(to bottom right, #35B297, #260F08);
-    color: inherit;
+    background-image: url(./assets/surfbuddy.png);
+    background-size: cover;
+    color: #15181a;
 }
 
 #p5 {
@@ -391,17 +394,17 @@ header {
 
 #p7 {
     grid-area: p7;
-    border: solid 1px gray;
-    color: inherit;
-}
-
-#p8 {
-    grid-area: p8;
     background: #0A2808;
     background: -webkit-radial-gradient(top left, #0A2808, #4B38A3);
     background: -moz-radial-gradient(top left, #0A2808, #4B38A3);
     background: radial-gradient(to bottom right, #0A2808, #4B38A3);
     color: #F1ECE2;
+}
+
+#p8 {
+    grid-area: p8;
+    border: solid 1px gray;
+    color: inherit;
 }
 
 #p9 {
