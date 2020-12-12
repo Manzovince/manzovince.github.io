@@ -38,7 +38,9 @@ h1, h2, h3, p, a {
 }
 
 .highlight {
-    border-bottom: 1px solid #00C3B7;
+    /*border-bottom: 1px solid #00C3B7;*/
+    padding: 0 2px;
+    background-image: linear-gradient(transparent 50%, #00c3b6a2 50%, #00c3b6a2 100%, transparent 100%);
 }
 
 .link {
@@ -362,9 +364,11 @@ header {
 
 #p3 {
     grid-area: p3;
-    background-image: url(./assets/wave.jpg);
-    background-size: cover;
-    color: #15181a;
+    background: #1765FB;
+    background: -webkit-radial-gradient(top left, #1765FB, #4B4347);
+    background: -moz-radial-gradient(top left, #1765FB, #4B4347);
+    background: radial-gradient(to bottom right, #1765FB, #4B4347);
+    color: #F1ECE2;
 }
 
 #p4 {
@@ -404,11 +408,9 @@ header {
 
 #p8 {
     grid-area: p8;
-    background: #1765FB;
-    background: -webkit-radial-gradient(top left, #1765FB, #4B4347);
-    background: -moz-radial-gradient(top left, #1765FB, #4B4347);
-    background: radial-gradient(to bottom right, #1765FB, #4B4347);
-    color: #F1ECE2;
+    background-image: url(./assets/wave.jpg);
+    background-size: cover;
+    color: #15181a;
 }
 
 #p9 {
