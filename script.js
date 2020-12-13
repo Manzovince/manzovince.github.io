@@ -6,6 +6,14 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matc
     colorMode('dark');
 }
 
+// Greeting
+function greeting() {
+    const greets = ['Hello', 'Hi', 'Ahoy', 'Welcome', 'Hey', 'Bonjour', 'Holã', 'Ciao']
+    var greet = greets[Math.floor(Math.random() * greets.length)];
+    document.getElementById('greet').innerHTML = greet + ', <br>';
+}
+greeting();
+
 // Set color theme
 function colorMode(color) {
     if (color == "dark") {
@@ -24,10 +32,6 @@ function colorMode(color) {
         if (document.getElementById('project')) {
             document.getElementById('project').className = 'dark';
         }
-        for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
-            document.getElementsByClassName('xp-line')[i].classList.remove('xp-light');
-            document.getElementsByClassName('xp-line')[i].classList.add('xp-dark');
-        }
     }
     else if (color == "light") {
         document.getElementById('color-mode').setAttribute( "onClick", "javascript: colorMode('dark');" );
@@ -44,11 +48,6 @@ function colorMode(color) {
         document.getElementsByTagName('footer')[0].className = 'light';
         if (document.getElementById('project')) {
             document.getElementById('project').className = 'light';
-        }
-        for (let i = 0; i < document.getElementsByClassName('xp-line').length; i++) {
-            document.getElementsByClassName('xp-line')[i].classList.remove('xp-dark');
-            document.getElementsByClassName('xp-line')[i].classList.add('xp-light');;
-            
         }
     }
 }
@@ -74,4 +73,10 @@ function toggle(el) {
     } else {
         document.getElementById(el).style.display = 'block';
     }
+}
+
+// Random music
+function music() {
+    document.getElementById('jukebox').style.display = 'block';
+
 }

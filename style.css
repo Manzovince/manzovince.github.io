@@ -12,7 +12,7 @@
 
 body {
     margin: 0;
-    font-family: 'Inter';
+    font-family: 'Inter', Sans-Serif;
     background-color: #00C3B7;
 }
 
@@ -40,7 +40,7 @@ h1, h2, h3, p, a {
 .highlight {
     /*border-bottom: 1px solid #00C3B7;*/
     padding: 0 2px;
-    background-image: linear-gradient(transparent 50%, #00c3b6a2 50%, #00c3b6a2 100%, transparent 100%);
+    background-image: linear-gradient(transparent 50%, #00c3b66c 50%, #00c3b66c 100%, transparent 100%);
 }
 
 .link {
@@ -81,7 +81,7 @@ h1, h2, h3, p, a {
 #navigation {
     position: fixed;
     top: 0;
-    z-index: 10;
+    z-index: 100;
     width: 80%;
     padding: 3vh 10% 3vh 10%;
     border-bottom: solid 1px rgba(128, 128, 128, 0.2);
@@ -112,10 +112,6 @@ h1, h2, h3, p, a {
 
 .nav-btn:hover {
     border-top: 1px solid;
-}
-
-.nav-active {
-    font-weight: 700;
 }
 
 #logo {
@@ -166,15 +162,9 @@ header {
 }
 
 #title {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab', monospace;
     font-size: 7vh;
     font-weight: 500;
-}
-
-@media only screen and (min-width: 768px) {
-    #resp-title {
-        display: none;
-    }
 }
 
 #social {
@@ -350,6 +340,7 @@ header {
 
 #p1 {
     grid-area: p1;
+    opacity: 1;
     border: solid 1px gray;
     color: inherit;
 }
@@ -358,7 +349,7 @@ header {
     grid-area: p2;
     background-image: url(./assets/popin-cover.png);
     background-size: cover;
-    background-position: center;
+    background-position: bottom 15% right 0%;
     color: #15181a;
 }
 
@@ -385,7 +376,7 @@ header {
     background: -webkit-radial-gradient(top left, #4A8AF6, #3FF6B6);
     background: -moz-radial-gradient(top left, #4A8AF6, #3FF6B6);
     background: radial-gradient(to bottom right, #4A8AF6, #3FF6B6);
-    color: inherit;
+    color: #15181A;
 }
 
 #p6 {
@@ -408,6 +399,7 @@ header {
 
 #p8 {
     grid-area: p8;
+    opacity: 1;
     background-image: url(./assets/wave.jpg);
     background-size: cover;
     color: #15181a;
