@@ -40,7 +40,7 @@ h1, h2, h3, p, a {
 .highlight {
     /*border-bottom: 1px solid #00C3B7;*/
     padding: 0 2px;
-    background-image: linear-gradient(transparent 50%, #00c3b66c 50%, #00c3b66c 100%, transparent 100%);
+    background-image: linear-gradient(transparent 50%, #00e9d980 50%, #00e9d980 100%, transparent 100%);
 }
 
 .link {
@@ -88,6 +88,7 @@ h1, h2, h3, p, a {
     display: flex;
     justify-content: center;
     align-items: center;
+    /*box-shadow: rgba(128, 128, 128, 0.05) 0 10px 20px;*/
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -167,19 +168,19 @@ header {
     font-weight: 500;
 }
 
-#social {
+#intro__social {
     display: flex;
     align-items: center;
-    margin: 3vh 0 3vh 0;
+    margin: 3vh 0;
 }
 
-#social a {
+#intro__social a {
     padding-right: 10px;
     opacity: .7;
     transition: 250ms ease-in-out;
 }
 
-#social a:hover {
+#intro__social a:hover {
     opacity: 1;
 }
 
@@ -248,7 +249,7 @@ header {
     border: 1px dashed gray;
     border-radius: 100%;
     animation: spin3D-1 15s linear 1s infinite;
-    -webkit-animation: spin3D-1 15s linear 1s infinite;
+    -webkit-animation: spin3D-2 15s linear 1s infinite;
 }
 
 @keyframes spin3D-3 {
@@ -269,7 +270,7 @@ header {
     border: 1px solid gray;
     border-radius: 100%;
     animation: spin3D-2 10s linear 1s infinite;
-    -webkit-animation: spin3D-2 10s linear 1s infinite;
+    -webkit-animation: spin3D-3 10s linear 1s infinite;
 }
 
 /* 
@@ -298,18 +299,12 @@ header {
 
 .project-bloc {
     position: relative;
-    display: flex;
-    flex-direction: column;
     padding: 24px;
     border-radius: 6px;
     height: 50vh;
     margin-bottom: 4vw;
-    opacity: .85;
-    transition: opacity 250ms ease-in-out;
-}
-
-.project-bloc:hover {
-    opacity: 1;
+    transition: all 250ms ease-in-out;
+    overflow: hidden;
 }
 
 @media only screen and (min-width: 768px) {
@@ -325,9 +320,8 @@ header {
     margin: -24px;
     height: 100%;
     width: 100%;
-    border-radius: 6px;
+    z-index: 2;
 }
-
 
 .project-title {
     font-size: 1.6rem;
@@ -336,6 +330,19 @@ header {
 
 .project-desc {
     font-weight: 300;
+}
+
+.project-arrow {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+    z-index: 1;
+}
+
+.project-bloc:hover .project-arrow {
+    opacity: 1;
 }
 
 #p1 {
@@ -381,19 +388,24 @@ header {
 
 #p6 {
     grid-area: p6;
-    background: #D0116B;
+    background-image: url(https://cdn.dribbble.com/users/4828409/screenshots/11207783/media/47270a20d739f96ff04a2277e0dfc5e4.png?compress=1&resize=1600x1200);
+    background-size: cover;
+    /*background: #D0116B;
     background: -webkit-radial-gradient(top left, #D0116B, #382D1B);
     background: -moz-radial-gradient(top left, #D0116B, #382D1B);
-    background: radial-gradient(to bottom right, #D0116B, #382D1B);
+    background: radial-gradient(to bottom right, #D0116B, #382D1B);*/
     color: #F1ECE2;
 }
 
 #p7 {
     grid-area: p7;
-    background: #0A2808;
+    background-image: url(https://cdn.dribbble.com/users/4828409/screenshots/11340870/media/a2faba815880d9d0adb9c7cebec3cc79.png?compress=1&resize=1600x1200);
+    background-size: cover;
+    background-position: center;
+    /*background: #0A2808;
     background: -webkit-radial-gradient(top left, #0A2808, #4B38A3);
     background: -moz-radial-gradient(top left, #0A2808, #4B38A3);
-    background: radial-gradient(to bottom right, #0A2808, #4B38A3);
+    background: radial-gradient(to bottom right, #0A2808, #4B38A3);*/
     color: #F1ECE2;
 }
 
@@ -446,6 +458,7 @@ header {
     margin-left: 5vw;
     width: 250px;
     border-radius: 6px;
+    opacity: .8;
 }
 
 .about-title {
@@ -548,6 +561,26 @@ footer {
     display: block;
 }
 
+#footer__social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5vh 0;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+#footer__social a {
+    padding: 0 12px;
+    opacity: .6;
+    transition: opacity 250ms ease-in-out;
+}
+
+#footer__social a:hover {
+    opacity: 1;
+}
+
 footer iframe {
     margin: 10% 50%;
     height: 200px;
@@ -560,6 +593,17 @@ footer div {
     opacity: 0.8;
 }
 
+#jukebox {
+    display: none;
+    padding: 20px 0;
+}
+
+#jukebox iframe {
+    margin: auto;
+    width: 30vh;
+    height: 30vh;
+}
+
 #music {
     cursor: pointer;
     color: coral;
@@ -569,4 +613,38 @@ footer div {
 
 #music:hover {
     opacity: 1;
+}
+
+/*
+*
+* Secret
+*
+*/
+
+#screenlog {
+    font-family: 'Roboto Slab';
+    font-weight: 200;
+    font-size: 12px;
+    opacity: 50%;
+    text-align: right;
+}
+
+#xAxis {
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px dashed gray;
+    opacity: 20%;
+    position: relative;
+}
+
+#yAxis {
+    width: 1px;
+    height: 100%;
+    border-left: 1px dashed gray;
+    opacity: 20%;
+    position: relative;
+}
+
+#dot {
+    cursor: help;
 }

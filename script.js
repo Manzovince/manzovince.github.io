@@ -80,3 +80,21 @@ function music() {
     document.getElementById('jukebox').style.display = 'block';
 
 }
+
+// Game activation
+function activate() {
+    alert('Oooh nice! Now click on the 00110001 00101110');
+}
+
+// Konami code
+let cursor = 0;
+const KONAMI_CODE = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+document.addEventListener('keydown', (e) => {
+  cursor = (e.keyCode == KONAMI_CODE[cursor]) ? cursor + 1 : 0;
+  if (cursor == KONAMI_CODE.length) activate();
+});
+
+// Secret
+function start() {
+    alert('Great, now let see.');
+}
