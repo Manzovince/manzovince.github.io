@@ -53,17 +53,19 @@ function colorMode(color) {
 }
 
 // Navigation follower
-window.onscroll = function() {
-    document.getElementById('work-btn').style.borderBottom = checkVisible('work') ? 'solid 1px' : '';
-    document.getElementById('about-btn').style.borderBottom = checkVisible('about') ? 'solid 1px' : '';
-};
-
 function checkVisible(id) {
     var el = document.getElementById(id);
     var rect = el.getBoundingClientRect();
     var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
     return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
 }
+
+window.onscroll = function() {
+    document.getElementById('work-btn').style.borderBottom = checkVisible('work') ? 'solid 1px' : '';
+    document.getElementById('work-btn').style.fontWeight = checkVisible('work') ? '600' : '';
+    document.getElementById('about-btn').style.borderBottom = checkVisible('about') ? 'solid 1px' : '';
+    document.getElementById('about-btn').style.fontWeight = checkVisible('about') ? '600' : '';
+};
 
 
 // Toggle
@@ -96,5 +98,5 @@ document.addEventListener('keydown', (e) => {
 
 // Secret
 function start() {
-    alert('Great, now let see.');
+    alert('Secret game under construction!');
 }

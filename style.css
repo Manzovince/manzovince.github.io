@@ -228,7 +228,7 @@ header {
     border: 1px solid gray;
     border-radius: 100%;
     animation: spin3D-1 20s linear 1s infinite;
-    -webkit-animation: spin3D-1 20s linear 1s infinite;
+    -webkit-animation: spin3D-1 40s linear 1s infinite;
 }
 
 @keyframes spin3D-2 {
@@ -249,7 +249,7 @@ header {
     border: 1px dashed gray;
     border-radius: 100%;
     animation: spin3D-1 15s linear 1s infinite;
-    -webkit-animation: spin3D-2 15s linear 1s infinite;
+    -webkit-animation: spin3D-2 30s linear 1s infinite;
 }
 
 @keyframes spin3D-3 {
@@ -270,7 +270,7 @@ header {
     border: 1px solid gray;
     border-radius: 100%;
     animation: spin3D-2 10s linear 1s infinite;
-    -webkit-animation: spin3D-3 10s linear 1s infinite;
+    -webkit-animation: spin3D-3 20s linear 1s infinite;
 }
 
 /* 
@@ -292,8 +292,7 @@ header {
         grid-auto-columns: 1fr 1fr 1fr;
         grid-template-areas: "p1 p2 p2"
                              "p3 p3 p4"
-                             "p5 p6 p7"
-                             "p8 p9 p9";
+                             "p5 p6 p6"
     }
 }
 
@@ -303,8 +302,10 @@ header {
     border-radius: 6px;
     height: 50vh;
     margin-bottom: 4vw;
-    transition: all 250ms ease-in-out;
     overflow: hidden;
+    opacity: 1;
+    color: inherit;
+    transition: all 250ms ease-in-out;
 }
 
 @media only screen and (min-width: 768px) {
@@ -320,16 +321,22 @@ header {
     margin: -24px;
     height: 100%;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
+    border-radius: 6px;
 }
 
 .project-title {
-    font-size: 1.6rem;
+    font-size: 3rem;
+    font-weight: 800;
     margin-bottom: 0.8rem;
+    position: relative;
+    z-index: 2;
 }
 
 .project-desc {
     font-weight: 300;
+    position: relative;
+    z-index: 2;
 }
 
 .project-arrow {
@@ -354,19 +361,16 @@ header {
 
 #p2 {
     grid-area: p2;
-    background-image: url(./assets/popin-cover.png);
-    background-size: cover;
-    background-position: bottom 15% right 0%;
+    background-color: #b1bfd8;
+    background-image: linear-gradient(315deg, #48618b 0%, #6782b4 74%);
     color: #15181a;
 }
 
 #p3 {
     grid-area: p3;
-    background: #1765FB;
-    background: -webkit-radial-gradient(top left, #1765FB, #4B4347);
-    background: -moz-radial-gradient(top left, #1765FB, #4B4347);
-    background: radial-gradient(to bottom right, #1765FB, #4B4347);
-    color: #F1ECE2;
+    background-color: #bd4f6c;
+    background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
+    color: #15181a;
 }
 
 #p4 {
@@ -379,51 +383,17 @@ header {
 
 #p5 {
     grid-area: p5;
-    background: #4A8AF6;
-    background: -webkit-radial-gradient(top left, #4A8AF6, #3FF6B6);
-    background: -moz-radial-gradient(top left, #4A8AF6, #3FF6B6);
-    background: radial-gradient(to bottom right, #4A8AF6, #3FF6B6);
-    color: #15181A;
+    background-image: url(https://cdn.dribbble.com/users/4828409/screenshots/11207783/media/47270a20d739f96ff04a2277e0dfc5e4.png?compress=1&resize=1600x1200);
+    background-size: cover;
+    color: #F1ECE2;
 }
 
 #p6 {
     grid-area: p6;
-    background-image: url(https://cdn.dribbble.com/users/4828409/screenshots/11207783/media/47270a20d739f96ff04a2277e0dfc5e4.png?compress=1&resize=1600x1200);
-    background-size: cover;
-    /*background: #D0116B;
-    background: -webkit-radial-gradient(top left, #D0116B, #382D1B);
-    background: -moz-radial-gradient(top left, #D0116B, #382D1B);
-    background: radial-gradient(to bottom right, #D0116B, #382D1B);*/
-    color: #F1ECE2;
-}
-
-#p7 {
-    grid-area: p7;
     background-image: url(https://cdn.dribbble.com/users/4828409/screenshots/11340870/media/a2faba815880d9d0adb9c7cebec3cc79.png?compress=1&resize=1600x1200);
     background-size: cover;
     background-position: center;
-    /*background: #0A2808;
-    background: -webkit-radial-gradient(top left, #0A2808, #4B38A3);
-    background: -moz-radial-gradient(top left, #0A2808, #4B38A3);
-    background: radial-gradient(to bottom right, #0A2808, #4B38A3);*/
     color: #F1ECE2;
-}
-
-#p8 {
-    grid-area: p8;
-    opacity: 1;
-    background-image: url(./assets/wave.jpg);
-    background-size: cover;
-    color: #15181a;
-}
-
-#p9 {
-    grid-area: p9;
-    background: #F3A161;
-    background: -webkit-radial-gradient(top left, #F3A161, #BC2896);
-    background: -moz-radial-gradient(top left, #F3A161, #BC2896);
-    background: radial-gradient(to bottom right, #F3A161, #BC2896);
-    color: #15181A;
 }
 
 /* 
@@ -457,14 +427,14 @@ header {
 #picture {
     margin-left: 5vw;
     width: 250px;
-    border-radius: 6px;
-    opacity: .8;
+    border-radius: 100%;
+    
 }
 
 .about-title {
     margin: 64px 0 24px 0;
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 2.8rem;
     letter-spacing: -.02rem;
     font-style: italic;
 }
@@ -533,7 +503,7 @@ header {
 
 /* 
 *
-* Project
+* Project page WIP
 *
 */
 
@@ -613,38 +583,4 @@ footer div {
 
 #music:hover {
     opacity: 1;
-}
-
-/*
-*
-* Secret
-*
-*/
-
-#screenlog {
-    font-family: 'Roboto Slab';
-    font-weight: 200;
-    font-size: 12px;
-    opacity: 50%;
-    text-align: right;
-}
-
-#xAxis {
-    height: 1px;
-    width: 100%;
-    border-bottom: 1px dashed gray;
-    opacity: 20%;
-    position: relative;
-}
-
-#yAxis {
-    width: 1px;
-    height: 100%;
-    border-left: 1px dashed gray;
-    opacity: 20%;
-    position: relative;
-}
-
-#dot {
-    cursor: help;
 }
