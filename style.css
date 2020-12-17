@@ -207,6 +207,7 @@ header {
         position: absolute;
         right: 0;
         bottom: 0;
+        opacity: .5;
     }
 }
 
@@ -290,9 +291,9 @@ header {
         display: grid;
         grid-gap: 1vw;
         grid-auto-columns: 1fr 1fr 1fr;
-        grid-template-areas: "p1 p2 p2"
-                             "p3 p3 p4"
-                             "p5 p6 p6"
+        grid-template-areas: "p-intro p-surf p-surf"
+                             "p-popin p-popin p-lifecal"
+                             "p-nasa p-sign p-sign"
     }
 }
 
@@ -321,75 +322,78 @@ header {
     margin: -24px;
     height: 100%;
     width: 100%;
-    z-index: 1;
     border-radius: 6px;
+    z-index: 3;
 }
 
 .project-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 0.8rem;
     position: relative;
-    z-index: 2;
 }
 
 .project-desc {
     font-weight: 300;
     position: relative;
-    z-index: 2;
 }
 
 .project-arrow {
     position: absolute;
-    bottom: 24px;
-    right: 24px;
+    bottom: 0;
+    right: 0;
+    padding: 24px;
+    border-bottom-right-radius: 6px;
+    border-top-left-radius: 6px;
+    box-shadow: 0 0 10px 0px #15181a50;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     opacity: 0;
-    transition: opacity 250ms ease-in-out;
-    z-index: 1;
+    transition: all 250ms ease-in-out;
 }
 
 .project-bloc:hover .project-arrow {
     opacity: 1;
 }
 
-#p1 {
-    grid-area: p1;
+#p-intro {
+    grid-area: p-intro;
     opacity: 1;
     border: solid 1px gray;
     color: inherit;
 }
 
-#p2 {
-    grid-area: p2;
-    background-color: #b1bfd8;
+#p-popin {
+    grid-area: p-popin;
+    background-color: #48618b;
     background-image: linear-gradient(315deg, #48618b 0%, #6782b4 74%);
     color: #15181a;
 }
 
-#p3 {
-    grid-area: p3;
+#p-lifecal {
+    grid-area: p-lifecal;
     background-color: #bd4f6c;
     background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
     color: #15181a;
 }
 
-#p4 {
-    grid-area: p4;
+#p-surf {
+    grid-area: p-surf;
     background-image: url(./assets/surfbuddy.png);
     background-size: cover;
     background-position: center;
     color: #15181a;
 }
 
-#p5 {
-    grid-area: p5;
+#p-nasa {
+    grid-area: p-nasa;
     background-image: url(https://cdn.dribbble.com/users/4828409/screenshots/11207783/media/47270a20d739f96ff04a2277e0dfc5e4.png?compress=1&resize=1600x1200);
     background-size: cover;
     color: #F1ECE2;
 }
 
-#p6 {
-    grid-area: p6;
+#p-sign {
+    grid-area: p-sign;
     background-image: url(https://cdn.dribbble.com/users/4828409/screenshots/11340870/media/a2faba815880d9d0adb9c7cebec3cc79.png?compress=1&resize=1600x1200);
     background-size: cover;
     background-position: center;
@@ -428,7 +432,6 @@ header {
     margin-left: 5vw;
     width: 250px;
     border-radius: 100%;
-    
 }
 
 .about-title {
@@ -477,8 +480,8 @@ header {
 }
 
 .xp-title {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 
 .xp-logo {
@@ -517,7 +520,7 @@ header {
     font-weight: 100;
 }
 
-/* 
+/*
 *
 * Footer
 *
@@ -525,10 +528,6 @@ header {
 
 footer {
     padding: 8% 25% 6% 25%;
-}
-
-#secret {
-    display: block;
 }
 
 #footer__social {
@@ -583,4 +582,54 @@ footer div {
 
 #music:hover {
     opacity: 1;
+}
+
+/*
+*
+* Unknown
+*
+*/
+
+#secret {
+    height: 100vh;
+    color: #F1ECE2;
+    background-color: #15181a;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+}
+
+#interrogation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: help;
+    font-size: 12rem;
+    font-weight: 600;
+    background-color: #15181a;
+    transition: transform 2s ease-in-out 4s;
+    z-index: 1;
+}
+
+#interrogation:hover {
+    transform: translateX(20%)
+}
+
+#launch {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px #00C3B7;
+    color: #00C3B7;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+}
+
+#launch:hover {
+    background-color: #00C3B7;
+    color: #15181a;
 }
