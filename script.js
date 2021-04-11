@@ -10,7 +10,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matc
 function greeting() {
     const greets = ['Hello', 'Hi', 'Ahoy', 'Welcome', 'Hey', 'Bonjour', 'Holã', 'Ciao']
     var greet = greets[Math.floor(Math.random() * greets.length)];
-    document.getElementById('greet').innerHTML = greet + ', <br>';
+    document.getElementById('greet').innerHTML = greet + ' ! <br>';
 }
 
 // Set color theme
@@ -78,7 +78,6 @@ window.onscroll = function() {
     document.getElementById('about-btn').style.fontWeight = checkVisible('about') ? '600' : '';
 };
 
-
 // Toggle
 function toggle(el) {
     if (document.getElementById(el).style.display == 'block') {
@@ -89,9 +88,10 @@ function toggle(el) {
 }
 
 // Random music
-function music() {
-    document.getElementById('jukebox').style.display = 'block';
-
+function randomMusic() {
+    let musics = ['<iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/5501395&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=true&visual=true"></iframe>'];
+    let music = musics[Math.floor(Math.random() * musics.length)];
+    document.getElementById('jukebox').innerHTML = music;
 }
 
 // Konami code
@@ -104,7 +104,7 @@ document.addEventListener('keydown', (e) => {
 
 // Game activation
 function activate() {
-    alert('Oooh nice! Now click on the 00110001 00101110');
+    alert('Well done! Now click on the 01100110 01101001 01110010 01110011 01110100 00100000 01100100 01101111 01110100');
 }
 
 // Secret

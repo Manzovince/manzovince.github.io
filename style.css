@@ -4,6 +4,11 @@
 *
 */
 
+:root {
+    --dark-theme: #15181A;
+    --light-theme: #F1ECE2;
+}
+
 /* 
 *
 * Utilities
@@ -55,11 +60,11 @@ h1, h2, h3, p, a {
 */
 
 .dark {
-    background-color: #15181A;
+    background-color: var(--dark-theme);
 }
 
 .light {
-    background-color: #F1ECE2;
+    background-color: var(--light-theme);
 }
 
 .body-dark {
@@ -88,9 +93,8 @@ h1, h2, h3, p, a {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*box-shadow: rgba(128, 128, 128, 0.05) 0 10px 20px;*/
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
 }
 
 .nav-btn {
@@ -185,6 +189,7 @@ header {
 }
 
 #description {
+    margin-top: 2rem;
     font-size: 3vh;
     font-weight: 200;
 }
@@ -289,7 +294,7 @@ header {
     #work {
         padding: 8% 10% 6% 10%;
         display: grid;
-        grid-gap: 1vw;
+        grid-gap: 2.5vw;
         grid-auto-columns: 1fr 1fr 1fr;
         grid-template-areas: "p-intro p-surf p-surf"
                              "p-popin p-popin p-lifecal"
@@ -300,12 +305,9 @@ header {
 .project-bloc {
     position: relative;
     padding: 24px;
-    border-radius: 6px;
-    height: 50vh;
-    margin-bottom: 4vw;
+    border-radius: 12px;
+    height: 40vh !important;
     overflow: hidden;
-    opacity: 1;
-    color: inherit;
     transition: all 250ms ease-in-out;
 }
 
@@ -336,24 +338,6 @@ header {
 .project-desc {
     font-weight: 300;
     position: relative;
-}
-
-.project-arrow {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 24px;
-    border-bottom-right-radius: 6px;
-    border-top-left-radius: 6px;
-    box-shadow: 0 0 10px 0px #15181a50;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    opacity: 0;
-    transition: all 250ms ease-in-out;
-}
-
-.project-bloc:hover .project-arrow {
-    opacity: 1;
 }
 
 #p-intro {
@@ -502,6 +486,18 @@ header {
     margin: 8px 0 20px 0;
     font-size: 0.8rem;
     font-weight: 300;
+}
+
+/* 
+*
+* World Map
+*
+*/
+
+#map {
+    width: 100%;
+    margin-top: 4rem;
+    fill: #F1ECE2;
 }
 
 /* 
