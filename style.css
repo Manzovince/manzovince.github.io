@@ -5,8 +5,9 @@
 */
 
 :root {
-    --dark-theme: #15181A;
-    --light-theme: #F1ECE2;
+    --dark-theme: rgb(21, 24, 26);
+    --light-theme: rgb(241, 236, 226);
+    --primary-color: rgb(0, 195, 183);
 }
 
 /* 
@@ -18,7 +19,7 @@
 body {
     margin: 0;
     font-family: 'Inter', Sans-Serif;
-    background-color: #00C3B7;
+    background-color: var(--primary-color);
 }
 
 button {
@@ -36,16 +37,10 @@ h1, h2, h3, p, a {
     display: none;
 }
 
-.pattern-dots {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: calc(10 * .5px) calc(10 * .5px);
-    height: 100%;
-}
-
 .highlight {
     /*border-bottom: 1px solid #00C3B7;*/
     padding: 0 2px;
-    background-image: linear-gradient(transparent 50%, #00e9d980 50%, #00e9d980 100%, transparent 100%);
+    background-image: linear-gradient(transparent 60%, #00e9d980 60%, #00e9d980 100%, transparent 100%);
 }
 
 .link {
@@ -68,13 +63,13 @@ h1, h2, h3, p, a {
 }
 
 .body-dark {
-    color: #F1ECE2;
-    border-color: #F1ECE2;
+    color: var(--light-theme);
+    border-color: var(--light-theme);
 }
 
 .body-light {
-    color: #15181A;
-    border-color: #15181A;
+    color: var(--dark-theme);
+    border-color: var(--dark-theme);
 }
 
 /* 
@@ -107,12 +102,12 @@ h1, h2, h3, p, a {
 
 .nav-dark {
     background-color: #15181a85;
-    color: #F1ECE2;
+    color: var(--light-theme);
 }
 
 .nav-light {
     background-color: #F1ECE285;
-    color: #15181A;
+    color: var(--dark-theme);
 }
 
 .nav-btn:hover {
@@ -307,8 +302,11 @@ header {
     padding: 24px;
     border-radius: 12px;
     height: 40vh !important;
-    overflow: hidden;
-    transition: all 250ms ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.project-bloc:hover {
+    box-shadow: inset 0 0 0 6px var(--primary-color);
 }
 
 @media only screen and (min-width: 768px) {
@@ -496,8 +494,14 @@ header {
 
 #map {
     width: 100%;
-    margin-top: 4rem;
+    margin-top: 6rem;
     fill: #F1ECE2;
+}
+
+#map_location {
+    font-family: monospace;
+    color: gray;
+    text-align: right;
 }
 
 /* 

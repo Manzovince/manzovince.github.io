@@ -1,10 +1,13 @@
 
 // Get color used by user
+/*
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
     colorMode('light');
 } else {
     colorMode('dark');
 }
+*/
+colorMode('dark');
 
 // Greeting
 function greeting() {
@@ -102,12 +105,11 @@ document.addEventListener('keydown', (e) => {
   if (cursor == KONAMI_CODE.length) activate();
 });
 
-// Game activation
+// Game
 function activate() {
     alert('Well done! Now click on the 01100110 01101001 01110010 01110011 01110100 00100000 01100100 01101111 01110100');
 }
 
-// Secret
 function start() {
     alert("Seeeecret game! Ok let's go.");
     window.location.href = "./unknown.html";

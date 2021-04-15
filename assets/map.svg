@@ -1,15 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 845.2 458" width="845.2" height="458" style="fill: #F1ECE260;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 845.2 458" width="845.2" height="458">
     <style>
-    .test {
-        position: relative;
-        top: 5px;
+
+	circle {
+		fill: rgba(128, 128, 128, .7);
+	}
+
+    .current_location {
+		transform-box: fill-box;
+		transform-origin: center;
+		fill: #00C3B7;
         animation: pulse 3s ease infinite
     }
 
     @keyframes pulse {
-        0% { fill: #F1ECE260; }
-        50% { fill: #00C3B7; }
-        100% { fill: #F1ECE260; }
+        0% {
+			transform: scale(1);
+		}
+
+		90% {
+			transform: scale(12);
+			opacity: 0;
+		}
+
+		100% {
+			transform: scale(1);
+			opacity: 0;
+		}
     }
     </style>
 
@@ -1586,7 +1602,9 @@
         Paris
 
     ############################################################################### -->
-	<circle class="test" cx="405.6" cy="171.3" r="1.4" style="fill: #00C3B7;"/>
+	<circle class="current_location" tooltip="azertyuiop" cx="405.6" cy="171.3" r="0.99"/>
+	<circle cx="405.6" cy="171.3" r="0.99" style="fill: #00C3B7;"/>
+
 	<circle cx="405.6" cy="178.1" r="0.99"/>
 	<circle cx="405.6" cy="184.9" r="0.99"/>
 	<circle cx="405.6" cy="205.3" r="0.99"/>
