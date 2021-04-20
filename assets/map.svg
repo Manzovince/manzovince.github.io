@@ -2,7 +2,7 @@
     <style>
 
 	circle {
-		fill: rgba(128, 128, 128, .7);
+		fill: rgba(128, 128, 128, .8);
 	}
 
     .current_location {
