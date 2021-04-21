@@ -8,7 +8,6 @@
     --dark-theme: rgb(21, 24, 26);
     --light-theme: rgb(241, 236, 226);
     --primary-color: rgb(0, 195, 183);
-    
 }
 
 /* 
@@ -74,10 +73,11 @@ button {
     background: none;
 }
 
-h1, h2, h3, p, a {
+h1, h2, h3, h4, h5, h6, p, a {
     text-decoration: none;
     margin: 0;
     color: inherit;
+    font-weight: normal;
 }
 
 .hidden {
