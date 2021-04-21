@@ -75,9 +75,9 @@ function checkVisible(id) {
 }
 
 window.onscroll = function() {
-    document.getElementById('work-btn').style.borderBottom = checkVisible('work') ? 'solid 1px' : '';
+    document.getElementById('work-btn').style.borderBottom = checkVisible('work') ? '2px solid' : '';
     document.getElementById('work-btn').style.fontWeight = checkVisible('work') ? '600' : '';
-    document.getElementById('about-btn').style.borderBottom = checkVisible('about') ? 'solid 1px' : '';
+    document.getElementById('about-btn').style.borderBottom = checkVisible('about') ? '2px solid' : '';
     document.getElementById('about-btn').style.fontWeight = checkVisible('about') ? '600' : '';
 };
 
@@ -107,7 +107,7 @@ document.addEventListener('keydown', (e) => {
 
 // Game
 function activate() {
-    alert('Well done! Now click on the 01100110 01101001 01110010 01110011 01110100 00100000 01100100 01101111 01110100');
+    alert("Well done! Now click on the 01100110 01101001 01110010 01110011 01110100 00100000 01100100 01101111 01110100");
 }
 
 function start() {
@@ -116,5 +116,5 @@ function start() {
 }
 
 function step2() {
-    alert("Well done!");
+    alert("Well done! Next part is currently under development. Stay tuned ;)");
 }
