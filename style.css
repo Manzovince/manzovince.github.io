@@ -87,7 +87,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 .highlight {
     /*border-bottom: 1px solid #00C3B7;*/
     padding: 0 2px;
-    background-image: linear-gradient(transparent 60%, #00e9d980 60%, #00e9d980 100%, transparent 100%);
+    background-image: linear-gradient(transparent 60%, rgba(0, 233, 217, 0.4) 60%, rgba(0, 233, 217, 0.4) 100%, transparent 100%);
 }
 
 .link {
@@ -403,7 +403,7 @@ header {
     padding: 4px 8px;
     font-size: 1rem;
     color: var(--light-theme);
-    background-color: rgba(21, 24, 26, .3);
+    background-color: rgba(21, 24, 26, .5);
     border-radius: 4px;
 }
 
@@ -423,9 +423,11 @@ header {
 
 #p-lifecal {
     grid-area: p-lifecal;
-    background-color: #bd4f6c;
-    background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
-    color: #15181a;
+    background-image: url(./assets/life-calendar.png);
+    background-size: cover;
+    background-position: center;
+    /*background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);*/
+    color: var(--light-theme);
 }
 
 #p-surf {
@@ -606,12 +608,13 @@ footer {
     justify-content: center;
     margin: 5vh 0;
     text-align: center;
-    font-size: 1.2rem;
-    font-weight: 200;
 }
 
 #footer__social a {
     padding: 0 12px;
+    font-family: 'Inter', Sans-Serif;
+    font-size: 1.1rem;
+    font-weight: 200;
     opacity: .6;
     transition: opacity 250ms ease-in-out;
 }
