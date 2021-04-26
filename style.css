@@ -360,7 +360,7 @@ header {
 .project-bloc {
     position: relative;
     padding: 24px;
-    margin-bottom: 24px;
+    /*margin-bottom: 24px;*/
     /*border-radius: 12px;*/
     height: 50vh !important;
     transition: .5s ease-in-out;
