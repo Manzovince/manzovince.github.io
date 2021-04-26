@@ -340,15 +340,16 @@ header {
 */
 
 #work {
-    padding: 30% 10% 6% 10%;
+    /*padding: 30% 0 6% 0;*/
     display: block;
 }
 
 @media only screen and (min-width: 768px) {
     #work {
-        padding: 8% 10% 6% 10%;
+        /*padding: 8% 0 6% 0;*/
         display: grid;
-        grid-gap: 2.5vw;
+        /*grid-gap: 2.5vw;*/
+        grid-gap: 0;
         grid-auto-columns: 1fr 1fr 1fr;
         grid-template-areas: "p-intro p-surf p-surf"
                              "p-popin p-popin p-lifecal"
@@ -360,8 +361,8 @@ header {
     position: relative;
     padding: 24px;
     margin-bottom: 24px;
-    border-radius: 12px;
-    height: 40vh !important;
+    /*border-radius: 12px;*/
+    height: 50vh !important;
     transition: .5s ease-in-out;
 }
 
@@ -382,7 +383,7 @@ header {
     margin: -24px;
     height: 100%;
     width: 100%;
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     z-index: 3;
 }
 
@@ -394,7 +395,7 @@ header {
 
 .project-desc {
     font-weight: 200;
-    margin-bottom: .8rem;
+    font-size: 1.3rem;
 }
 
 .project-tag {
@@ -410,7 +411,11 @@ header {
 #p-intro {
     grid-area: p-intro;
     opacity: 1;
-    border: solid 1px gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 4vw;
+    /*border: solid 1px gray;*/
     color: inherit;
 }
 
