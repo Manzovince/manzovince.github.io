@@ -1,4 +1,4 @@
-/* 
+/*
 *
 * Styles
 *
@@ -8,9 +8,10 @@
     --dark-theme: rgb(21, 24, 26);
     --light-theme: rgb(241, 236, 226);
     --primary-color: rgb(0, 195, 183);
+    --primary-gradient: linear-gradient(110deg, rgba(53, 93, 198, 1) 0%, rgba(0, 195, 183, 1) 50%, rgb(89, 189, 94) 100%);
 }
 
-/* 
+/*
 *
 * Fonts
 *
@@ -19,8 +20,7 @@
 @font-face {
     font-family: 'lackitalic';
     src: url('./assets/fonts/lack-italic-webfont.woff2') format('woff2'),
-         url('./assets/fonts/lack-italic-webfont.woff') format('woff'),
-         url('./assets/fonts/lack-italic-webfont.svg') format('svg');
+        url('./assets/fonts/lack-italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -29,8 +29,7 @@
 @font-face {
     font-family: 'lack_lineitalic';
     src: url('./assets/fonts/lack-line-italic-webfont.woff2') format('woff2'),
-         url('./assets/fonts/lack-line-italic-webfont.woff') format('woff'),
-         url('./assets/fonts/lack-line-italic-webfont.svg') format('svg');
+        url('./assets/fonts/lack-line-italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -39,8 +38,7 @@
 @font-face {
     font-family: 'lack_lineregular';
     src: url('./assets/fonts/lack-line-regular-webfont.woff2') format('woff2'),
-         url('./assets/fonts/lack-line-regular-webfont.woff') format('woff'),
-         url('./assets/fonts/lack-line-regular-webfont.svg') format('svg');
+        url('./assets/fonts/lack-line-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -49,8 +47,7 @@
 @font-face {
     font-family: 'lackregular';
     src: url('./assets/fonts/lackregular.woff2') format('woff2'),
-         url('./assets/fonts/lackregular.woff') format('woff'),
-         url('./assets/fonts/lackregular.svg') format('svg');
+        url('./assets/fonts/lackregular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -64,8 +61,10 @@
 
 body {
     margin: 0;
+    z-index: 0;
     font-family: 'Inter', Sans-Serif;
     background-color: var(--primary-color);
+    background: var(--primary-gradient);
 }
 
 button {
@@ -73,11 +72,17 @@ button {
     background: none;
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
     text-decoration: none;
     margin: 0;
     color: inherit;
-    font-weight: normal;
 }
 
 .hidden {
@@ -85,9 +90,25 @@ h1, h2, h3, h4, h5, h6, p, a {
 }
 
 .highlight {
-    /*border-bottom: 1px solid #00C3B7;*/
-    padding: 0 2px;
-    background-image: linear-gradient(transparent 60%, rgba(0, 233, 217, 0.4) 60%, rgba(0, 233, 217, 0.4) 100%, transparent 100%);
+    position: relative;
+}
+
+.highlight:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background: linear-gradient(transparent 92%, rgb(0, 195, 183) 8%);
+    animation: highlight 6s;
+    animation-delay: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes highlight {
+    0% { width: 0; }
+    50% { width: 100%; }
 }
 
 .link {
@@ -101,6 +122,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 *
 */
 
+/* Mobile */
 @media screen and (max-width: 800px) {
     .map {
         display: none;
@@ -185,7 +207,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 }
 
 #work-btn {
-    margin-left: auto;    
+    margin-left: auto;
 }
 
 #color-mode {
@@ -272,10 +294,11 @@ header {
 
 @keyframes spin3D-1 {
     from {
-      transform: rotate3d(.5,.5,.5, 360deg);
+        transform: rotate3d(.5, .5, .5, 360deg);
     }
-    to{
-      transform: rotate3d(0deg);
+
+    to {
+        transform: rotate3d(0deg);
     }
 }
 
@@ -284,7 +307,7 @@ header {
     right: 10%;
     top: 30%;
     width: 50vh;
-	height: 50vh;
+    height: 50vh;
     border: 1.2px solid gray;
     border-radius: 100%;
     animation: spin3D-1 20s linear 1s infinite;
@@ -293,10 +316,11 @@ header {
 
 @keyframes spin3D-2 {
     from {
-      transform: rotate3d(.5,1,0, 360deg);
+        transform: rotate3d(.5, 1, 0, 360deg);
     }
-    to{
-      transform: rotate3d(0deg);
+
+    to {
+        transform: rotate3d(0deg);
     }
 }
 
@@ -305,7 +329,7 @@ header {
     right: 17%;
     top: 35%;
     width: 40vh;
-	height: 40vh;
+    height: 40vh;
     border: 1.2px dashed gray;
     border-radius: 100%;
     animation: spin3D-1 15s linear 1s infinite;
@@ -314,10 +338,11 @@ header {
 
 @keyframes spin3D-3 {
     from {
-      transform: rotate3d(.8,.1,.5, 360deg);
+        transform: rotate3d(.8, .1, .5, 360deg);
     }
-    to{
-      transform: rotate3d(0deg);
+
+    to {
+        transform: rotate3d(0deg);
     }
 }
 
@@ -326,7 +351,7 @@ header {
     right: 24%;
     top: 40%;
     width: 30vh;
-	height: 30vh;
+    height: 30vh;
     border: 1.2px solid gray;
     border-radius: 100%;
     animation: spin3D-2 10s linear 1s infinite;
@@ -340,42 +365,35 @@ header {
 */
 
 #work {
-    /*padding: 30% 0 6% 0;*/
     display: block;
 }
 
 @media only screen and (min-width: 768px) {
     #work {
-        /*padding: 8% 0 6% 0;*/
         display: grid;
-        /*grid-gap: 2.5vw;*/
-        grid-gap: 0;
+        grid-gap: 4px;
         grid-auto-columns: 1fr 1fr 1fr;
         grid-template-areas: "p-intro p-surf p-surf"
-                             "p-popin p-popin p-lifecal"
-                             "p-nasa p-sign p-sign"
+            "p-popin p-popin p-lifecal"
+            "p-nasa p-sign p-sign"
+    }
+
+    .project-bloc {
+        display: block;
+        height: 20vw;
+        margin-bottom: 0;
     }
 }
 
 .project-bloc {
     position: relative;
     padding: 24px;
-    /*margin-bottom: 24px;*/
-    /*border-radius: 12px;*/
     height: 50vh !important;
     transition: .5s ease-in-out;
 }
 
 .project-bloc:hover {
     box-shadow: inset 0 0 0 6px var(--primary-color);
-}
-
-@media only screen and (min-width: 768px) {
-    .project-bloc {
-        display: block;
-        height: 20vw;
-        margin-bottom: 0;
-    }
 }
 
 .project-bloc a {
@@ -399,7 +417,7 @@ header {
 }
 
 .project-tag {
-    display:inline;
+    display: inline;
     font-family: monospace;
     padding: 4px 8px;
     font-size: 1rem;
@@ -470,7 +488,7 @@ header {
 
 @media only screen and (min-width: 768px) {
     #about {
-        padding: 10% 20% 6% 20%;
+        padding: 6% 20% 6% 20%;
     }
 }
 
@@ -609,10 +627,26 @@ footer {
 
 #footer__social {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     margin: 5vh 0;
     text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #footer__social {
+        flex-direction: column;
+    }
+
+    #footer__social a {
+        margin-bottom: 20px;
+    }
 }
 
 #footer__social a {
@@ -674,7 +708,7 @@ footer div {
     background-color: #15181a;
     display: flex;
     justify-content: center;
-    align-items:flex-end;
+    align-items: flex-end;
 }
 
 #interrogation {

@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property=”og:type” content=”website” />
-    <meta property="og:description" name="description" content="My name is Vincent Manzoni, and I am a UX Designer. Take a look at my projects, and you are welcome to chat with me.">
+    <meta property="og:description" name="description"
+        content="My name is Vincent Manzoni, and I am a UX Designer. Take a look at my projects, and you are welcome to chat with me.">
     <meta name="keywords" content="UX, Portfolio, UI, Cognition, Computer Science, Psychology, Design, Neuroscience">
     <meta name="author" content="Vincent Manzoni">
     <!-- Styles -->
     <link rel="stylesheet" href="./style.css">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/favicon.png" />
     <!-- Title -->
     <title>Manzoni Vincent | Portfolio</title>
 </head>
+
 <body id="page">
     <nav id="navigation">
         <a href="#header"><img id="logo" src="./assets/vm-logo.svg" alt=""></a>
@@ -28,19 +32,43 @@
     <header id="header">
         <div id="intro">
             <h1 id="title"><span id="greet"></span>I'm Vincent<span id="dot" onclick="start()">.</span></h1>
-            <p id="description">I come to the field of product creation with a background in <span class="highlight">cognitive</span> and <span class="highlight">computer sciences</span>. It enables me to speak the language of engineers, and gives me deep insights into user’s needs.</p>
+            <p id="description">I come to the field of product creation with a background in <a href="#about"
+                    class="highlight">cognitive</a> and <a href="#about" class="highlight">computer
+                    sciences</a>. It enables me to speak the language of engineers, and gives me deep insights into
+                user’s needs.</p>
             <div id="intro__social">
                 <a href="https://www.linkedin.com/in/vincent-manzoni/" target="_blank" id="linkedin" title="Linkedin">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#0072b1" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-                <a href="https://dribbble.com/VincentManzoni" target="_blank" id="dribbble" title="Dribbble">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E94C88" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>
-                </a>
-                <a href="https://github.com/Manzovince" target="_blank" id="github" title="Github">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#6e5494" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#0072b1" stroke-width="1" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
                 </a>
                 <a href="https://twitter.com/manzovince_" target="_blank" id="twitter" title="Twitter">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#1DA1F2" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#1DA1F2" stroke-width="1" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                        <path
+                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="https://github.com/Manzovince" target="_blank" id="github" title="Github">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#6e5494" stroke-width="1" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </a>
+                <a href="https://dribbble.com/VincentManzoni" target="_blank" id="dribbble" title="Dribbble">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E94C88" stroke-width="1" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path
+                            d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32">
+                        </path>
+                    </svg>
                 </a>
             </div>
         </div>
@@ -54,7 +82,8 @@
     <section id="work">
         <div id="p-intro" class="project-bloc" style="pointer-events: none;">
             <h2 class="project-title">Work</h2>
-            <div class="project-desc">Here are some of my personal and professional projects. It is still under construction, but don't worry, project pages will come soon.</div>
+            <div class="project-desc">Here are some of my personal and professional projects. It is still under
+                construction, but don't worry, project pages will come soon.</div>
         </div>
         <div id="p-popin" class="project-bloc">
             <a href="./projects/popin.html"></a>
@@ -88,18 +117,23 @@
     </section>
     <!-- About -->
     <section id="about">
-        <h2 class="about-title">Who</h2>
+        <h2 id="who" class="about-title">Who</h2>
         <div id="about-me">
             <div class="about-desc">
-                My name is Vincent. I am a lifelong learner, dedicated in making the product and services that surround us more human-centered. 
+                My name is Vincent. I am a lifelong learner, dedicated in making the product and services that surround
+                us more human-centered.
                 <br><br>
-                As a T-shaped profile, my curiosity makes me want to learn about every subject, and by experience, I know on what to focus my energy to make the best out of a project.  Designing the things that surround us, I value design that has a positive impact on society.
+                As a T-shaped profile, my curiosity makes me want to learn about every subject, and by experience, I
+                know on what to focus my energy to make the best out of a project. Designing the things that surround
+                us, I value design that has a positive impact on society.
                 <br><br>
-                Besides, I enjoy moving my body by running, swimming or climbing! (oh, and I love puzzles, there is even one right here on my website, starting with a famous konami cheat code.)
+                Besides, I enjoy moving my body by running, swimming or climbing! (oh, and I love puzzles, there is even
+                one right here on my website, starting with a famous konami cheat code.)
             </div>
-            <img id="picture" src="./assets/Unknown.svg" alt="Me, generated with ai-draw.tokyo" title="Me, generated with ai-draw.tokyo">
+            <img id="picture" src="./assets/Unknown.svg" alt="Me, generated with ai-draw.tokyo"
+                title="Me, generated with ai-draw.tokyo">
         </div>
-        <h2 class="about-title">What</h2>
+        <h2 id="what" class="about-title">What</h2>
         <div class="about-desc"></div>
         <div class="xp-bloc" onclick="toggle('xp1')">
             <div class="xp-line">
@@ -107,7 +141,8 @@
                 <div class="xp-title">UX Designer</div>
                 <div class="xp-location">Société Générale</div>
             </div>
-            <div id="xp1" class="xp-desc">Started this apprenticeship in September 2020. From Design system to high fidelity prototypes on financial services.</div>
+            <div id="xp1" class="xp-desc">Started this apprenticeship in September 2020. From Design system to high
+                fidelity prototypes on financial services.</div>
         </div>
         <div class="xp-bloc" onclick="toggle('xp2')">
             <div class="xp-line">
@@ -115,9 +150,11 @@
                 <div class="xp-title">Brand Content Manager</div>
                 <div class="xp-location">Pop-in</div>
             </div>
-            <div id="xp2" class="xp-desc">Using the lean start-up method, Élodie, Marie and I tried to answer one of the biggest parent's problem. Read the full story here: <a href="./project.html" class="link">Pop-in Case Study</a></div>
+            <div id="xp2" class="xp-desc">Using the lean start-up method, Élodie, Marie and I tried to answer one of the
+                biggest parent's problem. Read the full story here: <a href="./project.html" class="link">Pop-in Case
+                    Study</a></div>
         </div>
-        <h2 class="about-title">Where</h2>
+        <h2 id="where" class="about-title">Where</h2>
         <div class="about-desc">
             Always curious, always learning.
         </div>
@@ -127,7 +164,8 @@
                 <div class="xp-title">UX Design</div>
                 <div class="xp-location">École Multimédia</div>
             </div>
-            <div id="xp3" class="xp-desc">Following a one year program to learn UX: Psychology, user research, UI design, and more...</div>
+            <div id="xp3" class="xp-desc">Following a one year program to learn UX: Psychology, user research, UI
+                design, and more...</div>
         </div>
         <div class="xp-bloc" onclick="toggle('xp4')">
             <div class="xp-line">
@@ -135,7 +173,9 @@
                 <div class="xp-title">Developer</div>
                 <div class="xp-location">42</div>
             </div>
-            <div id="xp4" class="xp-desc">I spent one year at 42 (Paris), a school without teachers: I learned computer science by solo and team projects, and also participated throughout the year in Artificial Intelligence Workshops organised by 42AI Association. (C, Python)</div>
+            <div id="xp4" class="xp-desc">I spent one year at 42 (Paris), a school without teachers: I learned computer
+                science by solo and team projects, and also participated throughout the year in Artificial Intelligence
+                Workshops organised by 42AI Association. (C, Python)</div>
         </div>
         <div class="xp-bloc" onclick="toggle('xp5')">
             <div class="xp-line">
@@ -143,10 +183,13 @@
                 <div class="xp-title">Master in Psychology and Neurosciences of Movement</div>
                 <div class="xp-location">Université Paris Nanterre</div>
             </div>
-            <div id="xp5" class="xp-desc">After 3 years studying Psychology, I went to Paris to learn how intelligent systems and cognitive processes are shaped by aspects of the entire body of an organism. I also discovered the exciting world of scientific research, and wrote a dissertation on how sensory integrations allow the emergence of a body consciousness.</div>
+            <div id="xp5" class="xp-desc">After 3 years studying Psychology, I went to Paris to learn how intelligent
+                systems and cognitive processes are shaped by aspects of the entire body of an organism. I also
+                discovered the exciting world of scientific research, and wrote a dissertation on how sensory
+                integrations allow the emergence of a body consciousness.</div>
         </div>
         <!-- Map -->
-        <img id="map" class="map"src="./assets/map.svg">
+        <img id="map" class="map" src="./assets/map.svg">
         <div id="map_location" class="map">Currently working at Société Générale, Paris.</div>
     </section>
     <!-- Footer -->
@@ -168,7 +211,13 @@
         <div id="jukebox">
         </div>
         <div class="">
-            Hand-coded with good <span id="music" onclick="randomMusic();toggle('jukebox');"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></span>
+            Hand-coded with good <span id="music" onclick="randomMusic();toggle('jukebox');"><svg viewBox="0 0 24 24"
+                    width="14" height="14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"
+                    stroke-linejoin="round" class="css-i6dzq1">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg></span>
             <br><br>
         </div>
         <div class="">&copy; 2021 Vincent Manzoni. All rights reserved.</div>
@@ -176,4 +225,5 @@
     <!-- Script -->
     <script src="./script.js"></script>
 </body>
+
 </html>
