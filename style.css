@@ -171,6 +171,7 @@ a {
     align-items: center;
     backdrop-filter: blur(60px);
     -webkit-backdrop-filter: blur(60px);
+    transition: top .5s ease-in-out;
 }
 
 .nav-btn {
@@ -694,54 +695,4 @@ footer div {
 
 #music:hover {
     opacity: 1;
-}
-
-/*
-*
-* Unknown
-*
-*/
-
-#secret {
-    height: 100vh;
-    color: #F1ECE2;
-    background-color: #15181a;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-#interrogation {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: help;
-    font-size: 12rem;
-    font-weight: 600;
-    background-color: #15181a;
-    transition: transform 2s ease-in-out 4s;
-    z-index: 1;
-}
-
-#interrogation:hover {
-    transform: translateX(20%)
-}
-
-#launch {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: solid 1px #00C3B7;
-    color: #00C3B7;
-    padding: 5px 10px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 250ms ease-in-out;
-}
-
-#launch:hover {
-    background-color: #00C3B7;
-    color: #15181a;
 }
