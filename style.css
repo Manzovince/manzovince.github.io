@@ -11,6 +11,37 @@
     --primary-gradient: linear-gradient(110deg, rgba(53, 93, 198, 1) 0%, rgba(0, 195, 183, 1) 50%, rgb(89, 189, 94) 100%);
 }
 
+::selection {
+    color: var(--light-theme);
+    background: var(--primary-color);
+}
+
+body {
+    margin: 0;
+    z-index: 0;
+    font-family: 'Inter', Sans-Serif;
+    background-color: var(--primary-color);
+    background: var(--primary-gradient);
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+    text-decoration: none;
+    margin: 0;
+    color: inherit;
+}
+
 /*
 *
 * Fonts
@@ -59,32 +90,6 @@
 *
 */
 
-body {
-    margin: 0;
-    z-index: 0;
-    font-family: 'Inter', Sans-Serif;
-    background-color: var(--primary-color);
-    background: var(--primary-gradient);
-}
-
-button {
-    border: none;
-    background: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a {
-    text-decoration: none;
-    margin: 0;
-    color: inherit;
-}
-
 .hidden {
     display: none;
 }
@@ -99,6 +104,7 @@ a {
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
     left: 0;
     background: linear-gradient(transparent 92%, rgb(0, 195, 183) 8%);
     animation: highlight 6s;
@@ -107,8 +113,25 @@ a {
 }
 
 @keyframes highlight {
-    0% { width: 0; }
-    50% { width: 100%; }
+    0% {
+        width: 0;
+    }
+
+    50% {
+        width: 100%;
+    }
+}
+
+.underline-magical {
+    background-image: linear-gradient(120deg, rgba(132, 250, 176, .8) 0%, rgba(143, 211, 244, .8) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.15em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+}
+
+.underline-magical:hover {
+    background-size: 100% 88%;
 }
 
 .link {
