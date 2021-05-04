@@ -1,0 +1,227 @@
+/* 
+* Styles
+*/
+
+:root {
+    --dark: rgb(21, 24, 26);
+    --light: rgb(241, 236, 226);
+    --light-10: rgba(241, 236, 226, .1);
+    --light-30: rgba(241, 236, 226, .3);
+    --primary: rgb(0, 195, 183);
+    --secondary: rgb(23, 161, 152);
+}
+
+body {
+    margin: 0;
+    font-family: monospace;
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    text-decoration: none;
+    margin: 0;
+}
+
+/* 
+* Utilities
+*/
+
+.hidden {
+    display: none;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+/* 
+* Intro
+*/
+
+#intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 6rem 0;
+}
+
+#intro h1 {
+    font-size: 3rem;
+    margin-bottom: 64px;
+}
+
+#intro p {
+    margin: 0;
+}
+
+/* 
+* Datepicker
+*/
+
+#datepicker {
+    color: var(--dark);
+}
+
+/* 
+* Form
+*/
+
+#questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    margin: 2rem;
+    padding: 6em;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px 6px rgba(29, 29, 29, .2);
+}
+
+#questions form {
+    margin: 0;
+}
+
+.question {
+    margin: 32px 0;
+}
+
+form label {
+    font-size: 1rem;
+}
+
+form select {
+    margin: 0;
+}
+
+form input {
+    margin: 0 10px;
+}
+
+#expand {
+    background-color: var(--dark);
+}
+
+form button, #submit {
+    background-color: var(--primary);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 250ms ease-in-out;
+}
+
+button:hover, #submit:hover {
+    background-color: var(--secondary);
+}
+
+/* 
+* Settings
+*/
+
+#settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+/*
+* Legend
+*/
+
+#legend {
+    margin: 0 10rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cell-details {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.cellx2 {
+    transform: scale(2);
+}
+
+.details {
+    margin-left: 10px;
+}
+
+/* 
+* Calendar
+*/
+
+#calendar {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2rem 111px;
+}
+
+.cell .tooltip {
+    visibility: hidden;
+    background-color: var(--dark);
+    box-shadow: 3px 3px 10px 6px rgba(29, 29, 29, .2);
+    color: var(--light);
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    position: fixed;
+    bottom: 20px;
+    left: 45%;
+    z-index: 1;
+}
+
+.cell:hover .tooltip {
+    visibility: visible;
+}
+
+.break {
+    display: inline;
+}
+
+.cell {
+    height: 4px;
+    width: 4px;
+    margin: 1px;
+    background-color: var(--light-30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 500ms ease-out;
+}
+
+.cell:hover {
+    background-color: var(--light);
+}
+
+.hbd {
+    background-color: var(--primary);
+    color: var(--dark);
+}
+
+.hny {
+    background-color: burlywood;
+}
+
+.now {
+    background-color: coral;
+}
+
+.futur {
+    background-color: var(--light-10);
+}

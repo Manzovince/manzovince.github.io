@@ -9,6 +9,7 @@
     --light-theme: rgb(241, 236, 226);
     --primary-color: rgb(0, 195, 183);
     --primary-gradient: linear-gradient(110deg, rgba(53, 93, 198, 1) 0%, rgba(0, 195, 183, 1) 50%, rgb(89, 189, 94) 100%);
+    --danger-color: rgb(255, 92, 92);
 }
 
 ::selection {
@@ -718,4 +719,13 @@ footer div {
 
 #music:hover {
     opacity: 1;
+}
+
+#love {
+    color: var(--danger-color);
+    font-weight: 800;
+}
+
+#vjs {
+    color: var(--light-theme);
 }
