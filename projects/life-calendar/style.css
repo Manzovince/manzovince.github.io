@@ -195,8 +195,8 @@ button:hover, #submit:hover {
 }
 
 .cell {
-    height: 4px;
-    width: 4px;
+    height: 6px;
+    width: 6px;
     margin: 1px;
     background-color: var(--light-30);
     display: flex;
@@ -216,6 +216,10 @@ button:hover, #submit:hover {
 
 .hny {
     background-color: burlywood;
+}
+
+.event {
+    background-color:goldenrod;
 }
 
 .now {

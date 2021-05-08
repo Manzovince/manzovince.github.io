@@ -18,11 +18,7 @@ function createCal() {
     var birthday = new Date(bYear, bMonth, bDay);
     var end = new Date(Number(bYear)+eYear, bMonth, bDay);
     var now = new Date();
-    var event = new Date();
-
-    //var msecPassed = now - birthday;
-    //var daysPassed = Math.round((now-birthday)/(1000*60*60*24))-1;
-    //var weeksPassed = Math.round(daysPassed/7);
+    var event = new Date(2020, 8, 7);
 
     var html = "";
     var age = 0;
@@ -54,8 +50,8 @@ function createCal() {
         }
         // Event
         else if (t.toLocaleDateString() == event.toLocaleDateString()) {
-            html += `<div class="cell now">
-                        <span class="tooltip">`+t.getDate()+`-`+(t.getMonth()+1)+`-`+t.getFullYear()+` (Today)</span>
+            html += `<div class="cell event">
+                        <span class="tooltip">`+t.getDate()+`-`+(t.getMonth()+1)+`-`+t.getFullYear()+` (Event)</span>
                     </div>`;
         }
         // Futur
@@ -77,20 +73,6 @@ function createCal() {
         }
         t = new Date(newDate);
     }
-
-//    for (var t = birthday; t < end; t.setDate(t.getDate() + 1)) {
-//        console.log(t, new Date(t));
-//        html += `<div class="cell"><span class="tooltip">`+t.getDate()+`-`+(t.getMonth()+1)+`-`+t.getFullYear()+`</span></div>`;
-//    }
-
-//    for (i = 0; i < daysPassed; i++) {
-//        html += `<div class="cell"><span class="tooltip">`+start.getDate()+`-`+(start.getMonth()+1)+`-`+start.getFullYear()+`(`+i+`)`+`</span></div>`;
-//        if (i % 53 == 0) {
-//            html += `<div class="cell hbd"><span class="tooltip">`+start.getDate()+`-`+(start.getMonth()+1)+`-`+start.getFullYear()+`(`+i+`)`+`</span>`+age+`</div>`;
-//            age++;
-//        }
-//        start.setDate(start.getDate()+7);
-//    }
 
     document.getElementById("calendar").innerHTML = html;
 }

@@ -307,7 +307,7 @@ header {
 
 @media only screen and (min-width: 768px) {
     #illu {
-        display: block;
+        display: none;
         height: 100vh;
         width: 40vw;
         position: absolute;
@@ -315,6 +315,15 @@ header {
         bottom: 0;
         opacity: .5;
     }
+}
+
+#circles {
+    display: block;
+    height: 35vw;
+    width: 35vw;
+    position: absolute;
+    right: 4%;
+    bottom: 20%;
 }
 
 @keyframes spin3D-1 {
@@ -399,8 +408,8 @@ header {
         grid-gap: 4px;
         grid-auto-columns: 1fr 1fr 1fr;
         grid-template-areas: "p-intro p-surf p-surf"
-            "p-popin p-popin p-lifecal"
-            "p-nasa p-sign p-sign"
+            "p-flashbot p-lifecal p-popin"
+            "p-sign p-sign p-nasa"
     }
 
     .project-bloc {
@@ -499,6 +508,14 @@ header {
     background-size: cover;
     background-position: center;
     color: #F1ECE2;
+}
+
+#p-flashbot {
+    grid-area: p-flashbot;
+    background-image: linear-gradient(315deg, #0ed1a0 0%, #ce8139 74%);
+    background-size: cover;
+    background-position: center;
+    color: #15181a;
 }
 
 /* 
@@ -727,5 +744,6 @@ footer div {
 }
 
 #vjs {
-    color: var(--light-theme);
+    filter: sepia(100%);
+    font-weight: 400;
 }
