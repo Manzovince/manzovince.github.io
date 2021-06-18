@@ -123,18 +123,6 @@ a {
     }
 }
 
-.underline-magical {
-    background-image: linear-gradient(120deg, rgba(132, 250, 176, .8) 0%, rgba(143, 211, 244, .8) 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 0.15em;
-    background-position: 0 88%;
-    transition: background-size 0.25s ease-in;
-}
-
-.underline-magical:hover {
-    background-size: 100% 88%;
-}
-
 .link {
     color: hotpink;
     text-decoration: underline;
@@ -307,7 +295,6 @@ header {
 
 @media only screen and (min-width: 768px) {
     #illu {
-        display: none;
         height: 100vh;
         width: 40vw;
         position: absolute;
@@ -743,7 +730,7 @@ footer div {
     font-weight: 800;
 }
 
-#vjs {
-    filter: sepia(100%);
+#eco {
+    color: rgb(19, 179, 19);
     font-weight: 400;
 }

@@ -10,7 +10,7 @@ colorMode('dark');
 
 // Greeting
 function greeting() {
-    const greets = ['Hello', 'Hi', 'Ahoy', 'Welcome', 'Hey', 'Bonjour', 'Holã', 'Ciao']
+    const greets = ['Hello', 'Hi', 'Welcome', 'Hey', 'Bonjour', 'Holã', 'Ciao']
     var greet = greets[Math.floor(Math.random() * greets.length)];
     document.getElementById('greet').innerHTML = greet + ' !<br>';
 }
