@@ -208,6 +208,7 @@ header {
     font-weight: 200;
     max-width: 55ch;
     line-height: 1.5;
+    pointer-events: none;
 }
 
 #headline span {
