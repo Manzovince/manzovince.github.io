@@ -231,4 +231,9 @@ header {
     aspect-ratio: 1;
     background-color: orange;
     border-radius: 100%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: 0.6; }
 }
