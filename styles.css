@@ -1,8 +1,8 @@
 /* Style variables */
 
 :root {
-    --color-light: #e7d7c0;
-    --color-dark: #041e2a;
+    --color-light: hsl(35, 45%, 83%);
+    --color-dark: hsl(200, 90%, 6%);
     --color-primary: hsl(175, 43%, 47%);
     --color-secondary: hsl(175, 39%, 25%);
     --color-link: hsl(10, 84%, 76%);
@@ -152,8 +152,11 @@ nav input {
 
 #nav-list li {
     display: flex;
+    flex-direction: column;
     height: 100%;
     padding: 64px;
+    justify-content: space-around;
+    gap: 32px;
     transition: all .25s ease-in-out;
 }
 
@@ -181,7 +184,7 @@ nav input {
 
     #nav-checkbox:checked~#nav-list {
         display: flex;
-        right: 160px;
+        right: 180px;
         opacity: 1;
         /* box-shadow: rgba(100, 100, 100, 0.1) 0px 7px 32px 24px; */
     }
