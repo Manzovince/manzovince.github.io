@@ -1,0 +1,228 @@
+/* Style variables */
+
+:root {
+    --color-light: #e7d7c0;
+    --color-dark: #041e2a;
+    --color-primary: hsl(175, 43%, 47%);
+    --color-secondary: hsl(175, 39%, 25%);
+    --color-link: hsl(10, 84%, 76%);
+
+    --bg-color: var(--color-dark);
+    --text-color: var(--color-light);
+}
+
+/* Reset styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+a {
+    color: currentColor;
+    text-decoration: inherit;
+}
+
+/* General styles */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-family: sans-serif;
+    font-size: 1.2rem;
+}
+
+/*
+/   Navigation
+*/
+
+nav {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+
+#nav-backdrop {
+    position: fixed;
+    top: 0;
+    height: 20vh;
+    width: 100vw;
+    background-image: linear-gradient(180deg, var(--bg-color), transparent);
+    backdrop-filter: blur(8px);
+    -webkit-mask: linear-gradient(0deg, transparent, var(--bg-color) 90%);
+    pointer-events: none;
+    z-index: 990;
+}
+
+#back-to-top {
+    position: fixed;
+    top: clamp(32px, 5vw, 64px);
+    left: clamp(32px, 5vw, 64px);
+}
+
+#logo {
+    fill: transparent;
+    stroke: var(--text-color);
+    stroke-width: 1;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+}
+
+nav input {
+    display: none;
+}
+
+#nav-container {
+    position: fixed;
+    top: clamp(32px, 5vw, 64px);
+    right: clamp(32px, 5vw, 64px);
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 998;
+    transition: all .5s ease-out;
+}
+
+
+#nav-icon {
+    transition: all .3s ease-out;
+}
+
+#nav-icon:active {
+    transform: scale(.6);
+}
+
+#nav-icon>path {
+    fill: var(--text-color);
+    transition: all .25s ease-out;
+}
+
+#nav-container:hover #nav-icon>path {
+    d: path('M0 0 L32 0 L32 32 L0 32 Z');
+}
+
+#nav-checkbox:checked+#nav-container #nav-icon {
+    transform: rotate(135deg);
+}
+
+#nav-checkbox:checked+#nav-container #nav-icon:active {
+    transform: scale(.6);
+}
+
+#nav-checkbox:checked+#nav-container #nav-icon>path {
+    d: path('M0 0 L32 0 L32 32 L0 32 Z');
+}
+
+
+#nav-checkbox:checked~#nav-list {
+    display: flex;
+    right: 0;
+    opacity: 1;
+    /* box-shadow: rgba(100, 100, 100, 0.1) 0px 7px 32px 24px; */
+}
+
+#nav-list {
+    position: fixed;
+    height: 100vh;
+    right: -600px;
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--bg-color);
+    z-index: 997;
+    opacity: 0;
+    transition: all .5s ease-out;
+}
+
+#nav-list li {
+    display: flex;
+    height: 100%;
+    padding: 64px;
+    transition: all .25s ease-in-out;
+}
+
+@media only screen and (min-width: 768px) {
+    #nav-list {
+        position: fixed;
+        top: clamp(32px, 5vw, 64px);
+        height: auto;
+        padding: 0;
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        font-size: 24px;
+    }
+
+    #nav-list li {
+        display: flex;
+        height: auto;
+        padding: 0;
+        transition: all .25s ease-in-out;
+    }
+
+    #nav-checkbox:checked~#nav-list {
+        display: flex;
+        right: 160px;
+        opacity: 1;
+        /* box-shadow: rgba(100, 100, 100, 0.1) 0px 7px 32px 24px; */
+    }
+}
+
+#nav-list a {
+    width: 100%;
+}
+
+/* Header */
+
+header {
+    height: 100dvh;
+    padding: clamp(32px, 5vw, 64px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#headline {
+    font-size: clamp(24px, 8vw, 32px);
+    font-weight: 200;
+    max-width: 55ch;
+    line-height: 1.5;
+}
+
+#headline span {
+    font-weight: 300;
+    font-size: clamp(32px, 8vw, 42px);
+    font-family: 'La Belle Aurore';
+    line-height: 0;
+}
+
+#status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(12px, 6vw, 16px);
+    font-weight: 100;
+}
+
+.dot {
+    height: 8px;
+    aspect-ratio: 1;
+    background-color: orange;
+    border-radius: 100%;
+}

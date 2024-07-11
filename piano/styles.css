@@ -1,0 +1,115 @@
+/* Style variables */
+
+:root {
+    --color-light: hsl(35, 45%, 83%);
+    --color-dark: hsl(198, 82%, 9%);
+    --color-primary: hsl(175, 43%, 47%);
+    --color-secondary: hsl(175, 39%, 25%);
+    --color-link: hsl(10, 84%, 76%);
+
+    --bg-color: var(--color-dark);
+    --text-color: var(--color-light);
+}
+
+/* Reset styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/* General styles */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    min-height: 100vh;
+}
+
+/* body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+} */
+
+#note-color {
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+}
+
+#chord-display {
+    font-size: 96px;
+    font-weight: 100;
+    opacity: .2;
+    text-align: center;
+}
+
+#note-display {
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 100;
+    text-align: center;
+    min-height: 30px;
+}
+
+#piano-container {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#piano {
+    display: flex;
+    height: 140px;
+    padding: 10px;
+}
+
+.key {
+    position: relative;
+    /* margin: 0 1px; */
+}
+
+.white {
+    width: 30px;
+    height: 120px;
+    background-color: var(--text-color);
+    border: 1px solid var(--bg-color);
+    z-index: 1;
+}
+
+.black {
+    width: 20px;
+    height: 80px;
+    background-color: var(--bg-color);
+    margin-left: -10px;
+    margin-right: -10px;
+    z-index: 2;
+}
+
+.pressed {
+    background-color: white;
+}
+
+.black.pressed {
+    background-color: gray;
+}
