@@ -29,6 +29,7 @@ if (navigator.requestMIDIAccess) {
         .then(onMIDISuccess, onMIDIFailure);
 } else {
     console.log("WebMIDI is not supported in this browser.");
+    alert("WebMIDI is not supported in this browser.");
 }
 
 function onMIDISuccess(midiAccess) {
@@ -39,6 +40,7 @@ function onMIDISuccess(midiAccess) {
 
 function onMIDIFailure() {
     console.log("Could not access your MIDI devices.");
+    alert("Could not access your MIDI devices.");
 }
 
 function getMIDIMessage(message) {
