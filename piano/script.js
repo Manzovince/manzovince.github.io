@@ -1,3 +1,5 @@
+console.log("Hello I'm here");
+
 const piano = document.getElementById('piano');
 const whiteKeys = [0, 2, 4, 5, 7, 9, 11];
 const totalKeys = 88;
