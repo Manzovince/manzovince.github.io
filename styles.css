@@ -25,6 +25,13 @@ a {
     text-decoration: inherit;
 }
 
+/* Utilities */
+
+a[disabled] {
+    pointer-events: none;
+    opacity: .4;
+}
+
 /* General styles */
 
 html {
@@ -38,9 +45,7 @@ body {
     font-size: 1.2rem;
 }
 
-/*
-/   Navigation
-*/
+/* Navigation */
 
 nav {
     position: fixed;
