@@ -135,7 +135,7 @@ nav input {
 
 #nav-list {
     position: fixed;
-    height: 100vh;
+    height: 100dvh;
     right: -600px;
     margin: 0;
     padding: 0;
