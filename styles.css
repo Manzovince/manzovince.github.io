@@ -154,10 +154,15 @@ nav input {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100vw;
     padding: 64px;
     justify-content: space-around;
     gap: 32px;
     transition: all .25s ease-in-out;
+}
+
+#nav-list li:not(:last-child) {
+    border-bottom: solid 1px var(--color-light);
 }
 
 @media only screen and (min-width: 768px) {
@@ -176,10 +181,16 @@ nav input {
     }
 
     #nav-list li {
+        width: auto;
         display: flex;
         height: auto;
         padding: 0;
+        border-bottom: none;
         transition: all .25s ease-in-out;
+    }
+
+    #nav-list li:not(:last-child) {
+        border-bottom: none;
     }
 
     #nav-checkbox:checked~#nav-list {
