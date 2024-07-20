@@ -222,14 +222,20 @@ header {
     font-weight: 200;
     max-width: 55ch;
     line-height: 1.5;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
-#headline span {
+.script {
     font-weight: 300;
     font-size: clamp(32px, 8vw, 42px);
     font-family: 'La Belle Aurore';
     line-height: 0;
+}
+
+.highlight:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    /* border: solid 1px var(--text-color); */
 }
 
 #status {

@@ -1,61 +1,87 @@
-console.log("Hello I'm here");
+const keyboard = document.getElementById('keyboard');
+const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const noteNamesFR = ['Do', 'Do#', 'Ré', 'Ré#', 'Mi', 'Fa', 'Fa#', 'Sol', 'Sol#', 'La', 'La#', 'Si'];
+let activeNotes = [];
+let isMouseDown = false;
 
-const piano = document.getElementById('piano');
-const whiteKeys = [0, 2, 4, 5, 7, 9, 11];
-const totalKeys = 88;
-const startNote = 21; // A0
+const notesDisplay = document.getElementById('notes');
+const velocityDisplay = document.getElementById('velocity');
+const intervalsDisplay = document.getElementById('intervals');
+const chordDisplay = document.getElementById('chord');
+const keys = keyboard.getElementsByClassName('key');
 
-// Create piano keyboard
-function createKey(index) {
-    const key = document.createElement('div');
-    const noteNumber = startNote + index;
-    const octave = Math.floor(noteNumber / 12) - 1;
-    const noteName = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'][noteNumber % 12];
+const exerciseDisplay = document.getElementById('exercise-display');
+const startChordsBtn = document.querySelector('button[onclick="startExercise(\'chords\')"]');
+const startScalesBtn = document.querySelector('button[onclick="startExercise(\'scales\')"]');
+const stopExerciseBtn = document.querySelector('button[onclick="stopExercise()"]');
+const showAnswerBtn = document.querySelector('button[onclick="toggleAnswer()"]');
 
-    key.className = 'key ' + (whiteKeys.includes(noteNumber % 12) ? 'white' : 'black');
-    key.dataset.note = noteNumber;
-    key.title = `${noteName}${octave} (MIDI: ${noteNumber})`;
+let answer = false;
 
-    return key;
+let currentExercise = null;
+let currentChord = null;
+let currentScale = null;
+let correctNotes = null;
+const exerciseTypes = ['chords', 'scales'];
+
+const chordPatterns = {
+    '0': 'minor Second',
+    '1': 'Second',
+    '2': 'minor Third',
+    '3': 'Third',
+    '4': 'Fourth',
+    '5': 'Augmented Fourth',
+    '6': 'Fifth',
+    '7': 'minor Sixth',
+    '8': 'Sixth',
+    '9': 'minor Seventh',
+    '10': 'Seventh',
+    '11': 'Octave',
+    '3,2': 'Maj',
+    '2,3': 'min',
+    '2,2': 'Dim',
+    '3,3': 'Aug',
+    '1,4': 'sus2',
+    '4,1': 'sus4',
+    '3,2,1': 'Maj 6th',
+    '2,3,1': 'min 6th',
+    '3,2,2': 'Dom 7th',
+    '3,2,3': 'Maj 7th',
+    '2,3,2': 'min 7th',
+    '2,2,2': 'Dim 7th',
+};
+
+const scalePatterns = {
+    '1,1,0,1,1,1,0': 'Major',
+    '1,0,1,1,1,0,1': 'minor',
+    '2,1,0,0,2,1,2': 'Blues',
 }
 
-for (let i = 0; i < totalKeys; i++) {
-    piano.appendChild(createKey(i));
-}
+// MIDI input
 
-// MIDI message
-if (navigator.requestMIDIAccess) {
-    navigator.requestMIDIAccess()
-        .then(onMIDISuccess, onMIDIFailure);
-} else {
-    console.log("WebMIDI is not supported in this browser.");
-    alert("WebMIDI is not supported in this browser.");
-}
+navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 
 function onMIDISuccess(midiAccess) {
-    for (var input of midiAccess.inputs.values()) {
+    console.log("MIDI access granted. Waiting for MIDI input...");
+
+    for (let input of midiAccess.inputs.values()) {
         input.onmidimessage = getMIDIMessage;
     }
 }
 
-function onMIDIFailure() {
-    console.log("Could not access your MIDI devices.");
-    alert("Could not access your MIDI devices.");
+function onMIDIFailure(error) {
+    console.log("Failed to get MIDI access - ", error);
 }
 
 function getMIDIMessage(message) {
-    var command = message.data[0];
-    var note = message.data[1];
-    var velocity = (message.data.length > 2) ? message.data[2] : 0;
-
-    let color = `hsl(${Math.floor(((note - 21) / 87) * 360) }, ${Math.floor(((note - 21) / 87) * 94)}%, ${Math.floor((velocity / 127) * 100)}%)`;
-    console.log(note, color);
-    document.getElementById('note-color').style.backgroundColor = color;
+    let command = message.data[0];
+    let note = message.data[1];
+    let velocity = (message.data.length > 2) ? message.data[2] : 0;
 
     switch (command) {
         case 144: // noteOn
             if (velocity > 0) {
-                noteOn(note);
+                noteOn(note, velocity);
             } else {
                 noteOff(note);
             }
@@ -66,349 +92,372 @@ function getMIDIMessage(message) {
     }
 }
 
-const noteDisplay = document.getElementById('note-display');
-const chordDisplay = document.getElementById('chord-display');
-const intervalsDisplay = document.getElementById('intervals-display');
-const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-const activeNotes = new Set();
-const notes = new Set();
+// Note On-Off
 
-function getNoteNameFromMIDI(midiNote) {
-    const octave = Math.floor(midiNote / 12) - 1;
-    const noteName = noteNames[midiNote % 12];
-    return `${noteName}${octave}`;
-}
-
-function noteOn(note) {
-    const key = document.querySelector(`.key[data-note="${note}"]`);
-    if (key) {
-        key.classList.add('pressed');
+function noteOn(midiNote, velocity) {
+    const noteName = noteNames[midiNote % 12] + Math.floor(midiNote / 12 - 1);
+    activeNotes.push({ name: noteName, midiNote: midiNote, velocity: (velocity / 127).toFixed(1) });
+    updateOutput();
+    updateKeyboard();
+    if (chordMode != "Off") {
+        playChord(chordMode);
     }
-    addNoteToDisplay(note);
-}
-
-function noteOff(note) {
-    const key = document.querySelector(`.key[data-note="${note}"]`);
-    if (key) {
-        key.classList.remove('pressed');
+    if (currentExercise === 'chords') {
+        checkChord();
+    } else if (currentExercise === 'scales') {
+        checkScale();
     }
-    removeNoteFromDisplay(note);
 }
 
-function addNoteToDisplay(note) {
-    const noteName = getNoteNameFromMIDI(note);
-    activeNotes.add(noteName);
-
-    // Test
-    // notes.add(note);
-    // console.log(notes);
-
-    updateNotes(activeNotes);
-    updateChord(activeNotes);
-}
-
-function removeNoteFromDisplay(note) {
-    const noteName = getNoteNameFromMIDI(note);
-    activeNotes.delete(noteName);
-    noteDisplay.textContent = "";
-    chordDisplay.textContent = "Off";
-    updateNotes(activeNotes);
-    updateChord(activeNotes);
-}
-
-function updateNotes() {
-    let notesList = [];
-    let notesWithPositions = sortNotes(Array.from(activeNotes));
-    for (let i = 0; i < notesWithPositions.length; i++) {
-        const element = notesWithPositions[i].note;
-        notesList.push(element);
+function noteOff(midiNote) {
+    activeNotes = activeNotes.filter(n => n.midiNote !== midiNote);
+    updateOutput();
+    updateKeyboard();
+    if (currentExercise === 'chords') {
+        checkChord();
+    } else if (currentExercise === 'scales') {
+        checkScale();
     }
-
-    noteDisplay.textContent = notesList.join(' · ');
 }
 
-function updateChord() {
-    let notesList = [];
-    let notesWithPositions = sortNotes(Array.from(activeNotes));
-    for (let i = 0; i < notesWithPositions.length; i++) {
-        const element = notesWithPositions[i].note;
-        notesList.push(element);
-    }
-    let intervals = calculateRelativeIntervals(Array.from(activeNotes));
-    chordDisplay.textContent = intervalsToChord(intervals, notesList);
-}
+// Update informations
 
-function sortNotes(notes) {
-    const notePositions = {
-        'C': 0, 'C#': 1, 'Db': 1,
-        'D': 2, 'D#': 3, 'Eb': 3,
-        'E': 4, 'Fb': 4, 'F': 5,
-        'F#': 6, 'Gb': 6, 'G': 7,
-        'G#': 8, 'Ab': 8, 'A': 9,
-        'A#': 10, 'Bb': 10, 'B': 11
-    };
+function updateOutput() {
+    activeNotes.sort((a, b) => a.midiNote - b.midiNote);
 
-    const notesWithPositions = notes.map(note => {
-        const letter = note.slice(0, -1);
-        const octave = parseInt(note.slice(-1));
-        const position = notePositions[letter];
-        return { note, position, octave };
+    const intervals = calculateIntervals(activeNotes);
+
+    chordDisplay.textContent = NotesToChordName(activeNotes);
+
+    notesDisplay.textContent = "";
+    activeNotes.forEach(note => {
+        notesDisplay.textContent += note.name + " ";
     });
 
-    notesWithPositions.sort((a, b) => a.position + a.octave * 12 - (b.position + b.octave * 12));
+    velocityDisplay.textContent = "";
+    activeNotes.forEach(note => { velocityDisplay.textContent += note.velocity + " "; });
 
-    return notesWithPositions;
+    intervalsDisplay.textContent = intervals.join('\t');
 }
 
-function calculateRelativeIntervals(notes) {
+const calculateIntervals = notes => notes.slice(0, -1).map((note, i) => notes[i + 1].midiNote - note.midiNote - 1);
 
-    notesWithPositions = sortNotes(notes);
-
-    const intervals = [];
-    for (let i = 1; i < notesWithPositions.length; i++) {
-        const currentNote = notesWithPositions[i];
-        const prevNote = notesWithPositions[i - 1];
-        const interval = (currentNote.position + currentNote.octave * 12) - (prevNote.position + prevNote.octave * 12);
-        intervals.push(interval);
-    }
-
-    return intervals;
-}
-
-function intervalsToChord(intervals, notesList) {
-    console.log(intervals);
-    // Convert intervals array to a sorted string for easier comparison
-    let int = intervals.join(',');
-
-    intervalsDisplay.textContent = intervals.join(' · ');
-
-    let chord = ""
-
-    if (notesList.length === 0 ) { chord = "Off"; }
-    else if (notesList.length === 1 ) { chord = notesList[0].slice(0, -1); }
-    else if (notesList.length === 2 ) {
-        let octaves = Math.floor(intervals[0] / 12);
-        switch (intervals[0] % 12) {
-            case 0: chord = notesList[0].slice(0,-1) + " + Octave " + octaves; break;
-            case 1: chord = notesList[0].slice(0,-1) + " + minor Second " + octaves; break;
-            case 2: chord = notesList[0].slice(0,-1) + " + Second " + octaves; break;
-            case 3: chord = notesList[0].slice(0,-1) + " + minor Third " + octaves; break;
-            case 4: chord = notesList[0].slice(0,-1) + " + Third " + octaves; break;
-            case 5: chord = notesList[0].slice(0,-1) + " + Fourth " + octaves; break;
-            case 6: chord = notesList[0].slice(0,-1) + " + Aug Fourth " + octaves; break;
-            case 7: chord = notesList[0].slice(0,-1) + " + Fifth " + octaves; break;
-            case 8: chord = notesList[0].slice(0,-1) + " + minor Sixth " + octaves; break;
-            case 9: chord = notesList[0].slice(0,-1) + " + Sixth " + octaves; break;
-            case 10: chord = notesList[0].slice(0,-1) + " + minor Seventh " + octaves; break;
-            case 11: chord = notesList[0].slice(0,-1) + " + Seventh " + octaves; break;
-            default: chord = "2 notes unknown"; break;
-          }
-    }
-    else if (notesList.length === 3) {
-        switch (intervals.join(',')) {
-            case '4,3': chord = notesList[0].slice(0, -1) + " Maj"; break;
-            case '5,4': chord = notesList[1].slice(0, -1) + " Maj (inv 1)"; break;
-            case '3,5': chord = notesList[2].slice(0, -1) + " Maj (inv 2)"; break;
-            case '3,4': chord = notesList[0].slice(0, -1) + " min"; break;
-            case '5,3': chord = notesList[1].slice(0, -1) + " min (inv 1)"; break;
-            case '4,5': chord = notesList[2].slice(0, -1) + " min (inv 2)"; break;
-            case '2,5': chord = notesList[0].slice(0, -1) + " sus2"; break;
-            case '5,2': chord = notesList[0].slice(0, -1) + " sus4"; break;
-            case '3,3': chord = notesList[0].slice(0, -1) + " Dim"; break;
-            case '4,4': chord = notesList[0].slice(0, -1) + " Aug"; break;
-            case '7,5': chord = notesList[0].slice(0, -1) + " 5"; break;
-            case '3,6': chord = notesList[0].slice(0, -1) + " min6"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " Maj6"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " min7"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " Maj7"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " 7 (Dom)"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " min9"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " Maj9"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " min11"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " Maj11"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " min13"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " Maj13"; break;
-            case '???': chord = notesList[0].slice(0, -1) + " ♭13"; break;
-            case '12,12': chord = notesList[0].slice(0, -1) + " Octaves x2"; break;
-            default: chord = "3 notes unknown"; break;
-        }
-    }
-    else if (notesList.length === 4) {
-        switch (intervals.join(',')) {
-            case '12,12,12': chord = notesList[0].slice(0, -1) + " Octaves x3"; break;
-            default: chord = "4 notes unknown"; break;
-        }
-    }
-    else if (notesList.length === 5) {
-        switch (intervals.join(',')) {
-            case '12,12,12,12': chord = notesList[0].slice(0, -1) + " Octaves x4"; break;
-            default: chord = "5 notes unknown"; break;
-        }
-    }
-    else {
-        chord = "Not defined";
-    }
-
-    return chord;
-
-    // if (int === '') { return notesList[0].slice(0, -1); }
-    // else if (int === '1' || int === '13' || int === '25') { return notesList[0].slice(0, -1) + " + Minor Second"; }
-    // else if (int === '2' || int === '14' || int === '26') { return notesList[0].slice(0, -1) + " + Second"; }
-    // else if (int === '3' || int === '15' || int === '27') { return notesList[0].slice(0, -1) + " + minor Third"; }
-    // else if (int === '4' || int === '16' || int === '28') { return notesList[0].slice(0, -1) + " + Third"; }
-    // else if (int === '5' || int === '17' || int === '29') { return notesList[0].slice(0, -1) + " + Fourth"; }
-    // else if (int === '6' || int === '18' || int === '30') { return notesList[0].slice(0, -1) + " + Aug Fourth"; }
-    // else if (int === '7' || int === '19' || int === '31') { return notesList[0].slice(0, -1) + " + Fifth"; }
-    // else if (int === '8' || int === '20' || int === '32') { return notesList[0].slice(0, -1) + " + minor Sixth"; }
-    // else if (int === '9' || int === '21' || int === '33') { return notesList[0].slice(0, -1) + " + Sixth"; }
-    // else if (int === '10' || int === '22' || int === '34') { return notesList[0].slice(0, -1) + " + minor Seventh"; }
-    // else if (int === '11' || int === '23' || int === '35') { return notesList[0].slice(0, -1) + " + Seventh"; }
-    // else if (int === '12' || int === '24' || int === '36') { return notesList[0].slice(0, -1) + " + Octave"; }
-    // else if (int === '12,12') { return notesList[0].slice(0, -1) + " + Octave x2"; }
-    // else if (int === '12,12,12') { return notesList[0].slice(0, -1) + " + Octave x3"; }
-    // else if (int === '4,3') { return notesList[0].slice(0, -1) + " Major"; }
-    // else if (int === '5,4') { return notesList[1].slice(0, -1) + " Major (inv 1)"; }
-    // else if (int === '3,5') { return notesList[2].slice(0, -1) +  " Major (inv 2)"; }
-    // else if (int === '3,4') { return notesList[0].slice(0, -1) + " minor"; }
-    // else if (int === '5,3') { return notesList[1].slice(0, -1) + " minor (inv 1)"; }
-    // else if (int === '4,5') { return notesList[2].slice(0, -1) + " minor (inv 2)"; }
-    // else if (int === '2,5') { return notesList[0].slice(0, -1) + " sus2"; }
-    // else if (int === '5,2') { return notesList[0].slice(0, -1) + " sus4"; }
-    // else if (int === '3,3') { return notesList[0].slice(0, -1) + " Dim"; }
-    // else if (int === '4,4') { return notesList[0].slice(0, -1) + " Aug"; }
-    // else if (int === '7,5') { return notesList[0].slice(0, -1) + " 5"; }
-    // else if (int === '3,6' || int === '6,3' || int === '3,4,2') { return notesList[0].slice(0, -1) + " min6"; }
-    // else if (int === '4,3,2') { return notesList[0].slice(0, -1) + " Maj6"; }
-    // else if (int === '4,6' ) { return notesList[0].slice(0, -1) + " 7"; }
-    // else if (int === '2,3' || int === '3,4,3') { return notesList[0].slice(0, -1) + " min7"; }
-    // else if (int === '3,7' || int === '2,3' || int === '3,4,3') { return notesList[0].slice(0, -1) + " min7"; }
-    // else if (int === '2,3,4') { return notesList[0][1] + " min7 (inv 1)"; }
-    // else if (int === '4,7' || int === '4,3,4') { return notesList[0].slice(0, -1) + " Maj7"; }
-    // else if (int === '1,4,3') { return notesList[1].slice(0, -1) + " Maj7 (inv 1)"; }
-    // else if (int === '4,3,3') { return notesList[0].slice(0, -1) + " Dom7"; }
-    // else if (int === '3,4,7') { return notesList[0].slice(0, -1) + " min9"; }
-    // else if (int === '4,3,7') { return notesList[0].slice(0, -1) + " Maj9"; }
-    // else if (int === '3,2,5') { return notesList[0].slice(0, -1) + " min11"; }
-    // else if (int === '4,1,6') { return notesList[0].slice(0, -1) + " Maj11"; }
-    // else if (int === '2') { return notesList[0].slice(0, -1) + " min13"; }
-    // else if (int === '2') { return notesList[0].slice(0, -1) + " Maj13"; }
-    // else if (int === '4,3,1') { return notesList[0].slice(0, -1) + " b13"; }
-    // else if (int === '2,3,2') { return notesList[0].slice(0, -1) + " 9sus4"; }
-    // else if (int === '2,2,1,2') { return notesList[0].slice(0, -1) + " 9/11"; }
-    // else if (int === '2,1' || int === '000') { return notesList[0].slice(0, -1) + " min add9"; }
-    // else if (int === '1,2' || int === '000') { return notesList[0].slice(0, -1) + " min add b9"; }
-    // else if (int === '2,2' || int === '2,2,3') { return notesList[0].slice(0, -1) + " add9"; }
-    // else if (int === '4,1,2') { return notesList[0].slice(0, -1) + " add11"; }
-    // else if (int === '4,3,4,3,3') { return notesList[0].slice(0, -1) + " 13"; }
-    // else if (int === '1,2,3,4') { return " Test"; }
-    // else { return notesList[0].slice(0, -1) + " ?" }
-}
-
-// const chordDefinitions = {
-//     // Intervals are represented as strings for faster lookup
-//     '': note => `${note} + Minor Second`,
-//     '1': note => `${note} + Minor Second`,
-//     '2': note => `${note} + Second`,
-//     '3': note => `${note} + minor Third`,
-//     '4': note => `${note} + Third`,
-//     '5': note => `${note} + Fourth`,
-//     '6': note => `${note} + Aug Fourth`,
-//     '7': note => `${note} + Fifth`,
-//     '8': note => `${note} + minor Sixth`,
-//     '9': note => `${note} + Sixth`,
-//     '10': note => `${note} + minor Seventh`,
-//     '11': note => `${note} + Seventh`,
-//     '12': note => `${note} + Octave`,
-//     '12,12': note => `${note} + Octave x2`,
-//     '12,12,12': note => `${note} + Octave x3`,
-    
-//     // Triads and other chords
-//     '4,3': note => `${note} Major`,
-//     '5,4': (_, notes) => `${notes[1]} Major (inv 1)`,
-//     '3,5': (_, notes) => `${notes[2]} Major (inv 2)`,
-//     '3,4': note => `${note} minor`,
-//     '5,3': (_, notes) => `${notes[1]} minor (inv 1)`,
-//     '4,5': (_, notes) => `${notes[2]} minor (inv 2)`,
-//     '2,5': note => `${note} sus2`,
-//     '5,2': note => `${note} sus4`,
-//     '3,3': note => `${note} Dim`,
-//     '4,4': note => `${note} Aug`,
-//     '7,5': note => `${note} 5`,
-//     '3,6': note => `${note} min6`,
-//     '6,3': note => `${note} min6`,
-//     '3,4,2': note => `${note} min6`,
-//     '4,3,2': note => `${note} Maj6`,
-//     '4,6': note => `${note} 7`,
-//     '3,7': note => `${note} min7`,
-//     '2,3': note => `${note} min7`,
-//     '3,4,3': note => `${note} min7`,
-//     '2,3,4': (_, notes) => `${notes[0][1]} min7 (inv 1)`,
-//     '4,7': note => `${note} Maj7`,
-//     '4,3,4': note => `${note} Maj7`,
-//     '1,4,3': (_, notes) => `${notes[1]} Maj7 (inv 1)`,
-//     '4,3,3': note => `${note} Dom7`,
-//     '3,4,7': note => `${note} min9`,
-//     '4,3,7': note => `${note} Maj9`,
-//     '3,2,5': note => `${note} min11`,
-//     '4,1,6': note => `${note} Maj11`,
-//     '222': note => `${note} min13`,
-//     '4,3,1': note => `${note} b13`,
-//     '2,3,2': note => `${note} 9sus4`,
-//     '2,2,1,2': note => `${note} 9/11`,
-//     '2,1': note => `${note} min add9`,
-//     '1,2': note => `${note} min add b9`,
-//     '2,2': note => `${note} add9`,
-//     '2,2,3': note => `${note} add9`,
-//     '4,1,2': note => `${note} add11`,
-//     '4,3,4,3,3': note => `${note} 13`,
-//     '1,2,3,4': () => 'Test'
-// };
-
-// function intervalsToChord(intervals, notesList) {
-//     console.log(intervals);
-//     document.getElementById('intervals-display').textContent = intervals.join(' · ');
-
-//     if (notesList.length === 0) return "Off";
-
-//     const rootNote = notesList[0].slice(0, -1);
-//     const intervalKey = intervals.join(',');
-
-//     // Check for octave equivalents
-//     const normalizedIntervalKey = intervals.map(i => i % 12).sort((a, b) => a - b).join(',');
-
-//     if (chordDefinitions.hasOwnProperty(intervalKey)) {
-//         return chordDefinitions[intervalKey](rootNote, notesList);
-//     } else if (chordDefinitions.hasOwnProperty(normalizedIntervalKey)) {
-//         return chordDefinitions[normalizedIntervalKey](rootNote, notesList);
-//     } else {
-//         return `${rootNote} ?`;
+// function calculateIntervals(notes) {
+//     const intervals = [];
+//     for (let i = 0; i < notes.length - 1; i++) {
+//         const interval = notes[i + 1].midiNote - notes[i].midiNote;
+//         intervals.push(interval - 1);
 //     }
+//     return intervals;
 // }
 
+function NotesToChordName(notes) {
+    if (notes.length === 0) { return ""; }
+    else if (notes.length === 1) { return noteNames[notes[0].midiNote % 12]; }
+    else if (notes.length === 2) { return `${noteNames[notes[0].midiNote % 12]} + ${chordPatterns[calculateIntervals(notes) % 12]}`; }
+    else {
+        intervals = calculateIntervals(notes);
+        let inversion = 0;
 
-const MIDI_NOTE_ON = 144;
-const MIDI_NOTE_OFF = 128;
-const MIDI_VELOCITY = 100;
-const testChord = [60, 64, 67]; // MIDI notes for C4, E4, G4
+        console.log(notes);
 
-// Add this function to your existing code
-function simulateMIDIMessage(note, isNoteOn) {
-    const command = isNoteOn ? MIDI_NOTE_ON : MIDI_NOTE_OFF;
-    const velocity = isNoteOn ? MIDI_VELOCITY : 0;
-    getMIDIMessage({ data: [command, note, velocity] });
+        return `${noteNames[notes[inversion].midiNote % 12]} ${chordPatterns[intervals]}`;
+    }
 }
 
-// Add this event listener at the end of your script
-document.addEventListener('keydown', (event) => {
-    if (event.code === 'Space' && !event.repeat) {
-        event.preventDefault(); // Prevent scrolling
-        testChord.forEach(note => simulateMIDIMessage(note, true));
+// Piano keyboard generation
+
+function createKeyboard() {
+    keyboard.innerHTML = '';
+    const screenWidth = window.innerWidth;
+    const octaves = Math.max(1, Math.min(7, Math.floor(screenWidth / 210))); // 7 white keys per octave, ~30px each
+
+    for (let octave = 0; octave < octaves; octave++) {
+        for (let i = 0; i < 12; i++) {
+            const key = document.createElement('div');
+            const isBlack = [1, 3, 6, 8, 10].includes(i);
+            key.className = `key ${isBlack ? 'black' : 'white'}`;
+            key.dataset.note = octave * 12 + i + 24; // Start from A0 (MIDI note 21)
+            key.textContent = octave * 12 + i + 24;
+            keyboard.appendChild(key);
+        }
+    }
+}
+
+function updateKeyboard() {
+    for (let key of keys) {
+        key.classList.remove('active', 'correct', 'incorrect');
+    }
+    for (let note of activeNotes) {
+        const key = keyboard.querySelector(`[data-note="${note.midiNote}"]`);
+        if (key) key.classList.add('active');
+    }
+    if (currentExercise) {
+        highlightPlayedNotes();
+    }
+}
+
+createKeyboard();
+window.addEventListener('resize', createKeyboard);
+
+// Interactive keyboard
+
+const keyboardMap = {
+    81: 60, 90: 61, 83: 62, 69: 63, 68: 64, 70: 65, 84: 66,
+    71: 67, 89: 68, 72: 69, 85: 70, 74: 71, 75: 72, 79: 73,
+    76: 74, 80: 75, 77: 76
+};
+
+document.addEventListener('keydown', handleKeyDown);
+document.addEventListener('keyup', handleKeyUp);
+
+function handleKeyDown(event) {
+    if (event.repeat) return;
+    if (keyboardMap[event.keyCode]) { noteOn(keyboardMap[event.keyCode], 50); }
+}
+
+function handleKeyUp(event) { noteOff(keyboardMap[event.keyCode]); }
+
+// Click on keys
+keyboard.addEventListener('mousedown', (e) => {
+    isMouseDown = true;
+    if (e.target.classList.contains('key')) {
+        noteOn(e.target.getAttribute('data-note'), 50);
     }
 });
 
-document.addEventListener('keyup', (event) => {
-    if (event.code === 'Space') {
-        event.preventDefault();
-        testChord.forEach(note => simulateMIDIMessage(note, false));
-    }
+keyboard.addEventListener('mouseup', () => {
+    isMouseDown = false;
+    Array.from(keys).forEach(key => {
+        if (key.classList.contains('active')) {
+            noteOff(key.getAttribute('data-note'));
+        }
+    });
 });
+
+// Chord exercice
+
+function startExercise(type) {
+    if (!exerciseTypes.includes(type)) return;
+    currentExercise = type;
+    if (type === 'chords') {
+        nextChordExercise();
+    } else if (type === 'scales') {
+        nextScaleExercise();
+    }
+    updateUI();
+}
+
+function stopExercise() {
+    currentExercise = null;
+    currentChord = null;
+    currentScale = null;
+    answer = true;
+    toggleAnswer();
+    updateUI();
+    for (let key of keys) {
+        key.classList.remove('correct', 'incorrect');
+    }
+}
+
+function nextChordExercise() {
+    let chordNames = Object.keys(chordPatterns).filter(key => key.includes(','));
+    let randomChord = chordNames[Math.floor(Math.random() * chordNames.length)];
+    let rootNote = noteNames[Math.floor(Math.random() * 12)];
+    currentChord = { root: rootNote, type: chordPatterns[randomChord], intervals: randomChord };
+    updateUI();
+}
+
+function getChordNotes(intervals) {
+    let shift = noteNames.indexOf(currentChord.root);
+    let chordNotes = [noteNames[shift]];
+    intervals.forEach(interval => {
+        shift += Number(interval) + 1;
+        if (shift > 11) { shift -= 12; }
+        chordNotes.push(noteNames[shift]);
+    })
+    return chordNotes;
+}
+
+function checkChord() {
+    if (!currentChord) return;
+    const expectedNotes = getChordNotes(currentChord.intervals.split(','));
+    const playedNotes = activeNotes.map(note => note.name.replace(/\d+/, '')); // Remove octave number
+    const isCorrect = expectedNotes.every(note => playedNotes.includes(note)) &&
+        playedNotes.every(note => expectedNotes.includes(note));
+
+    if (isCorrect) {
+        highlightCorrectChord();
+        setTimeout(() => {
+            answer = true;
+            toggleAnswer();
+            nextChordExercise();
+        }, 1000);
+    } else {
+        highlightPlayedNotes();
+    }
+}
+
+function highlightPlayedNotes() {
+    // const correctNotes = getChordNotes(currentChord.root, currentChord.intervals.split(','));
+    if (currentExercise === 'chords') {
+        correctNotes = getChordNotes(currentChord.intervals.split(','));
+    } else if (currentExercise === 'scales') {
+        correctNotes = getScaleNotes(currentScale.intervals.split(','));
+    } else { return; }
+
+    activeNotes.forEach(note => {
+        const noteName = note.name.replace(/\d+/, ''); // Remove octave number
+        const isCorrect = correctNotes.includes(noteName);
+        highlightNote(note.midiNote, isCorrect ? 'correct' : 'incorrect');
+    });
+}
+
+function highlightCorrectChord() {
+    correctNotes = getChordNotes(currentChord.intervals.split(','));
+    highlightNotes(correctNotes, 'correct');
+}
+
+// Scale exercise
+
+function nextScaleExercise() {
+    let scaleNames = Object.keys(scalePatterns).filter(key => key.includes(','));
+    let randomScale = scaleNames[Math.floor(Math.random() * scaleNames.length)];
+    let rootNote = noteNames[Math.floor(Math.random() * 12)];
+    currentScale = { root: rootNote, type: scalePatterns[randomScale], intervals: randomScale };
+    checkScale();
+    updateUI();
+}
+
+function getScaleNotes(intervals) {
+    let shift = noteNames.indexOf(currentScale.root);
+    let scaleNotes = [];
+    intervals.forEach(interval => {
+        scaleNotes.push(noteNames[shift]);
+        shift += Number(interval) + 1;
+        if (shift > 11) { shift -= 12; }
+    })
+    return scaleNotes;
+}
+
+function checkScale() {
+    if (!currentScale) return;
+    const expectedNotes = getScaleNotes(currentScale.intervals.split(','));
+    const playedNotes = activeNotes.map(note => note.name.replace(/\d+/, '')); // Remove octave number
+    const isCorrect = expectedNotes.every(note => playedNotes.includes(note)) &&
+        playedNotes.every(note => expectedNotes.includes(note));
+
+    if (isCorrect) {
+        highlightCorrectScale();
+        setTimeout(() => {
+            answer = true;
+            toggleAnswer();
+            nextScaleExercise();
+        }, 1000);
+    } else {
+        highlightPlayedNotes();
+    }
+}
+
+function highlightCorrectScale() {
+    const correctNotes = getScaleNotes(currentScale.intervals.split(','));
+    highlightNotes(correctNotes, 'correct');
+}
+
+// Highlight notes
+
+function highlightNotes(notes, className) {
+    for (let key of keys) {
+        const keyNote = noteNames[key.dataset.note % 12];
+        key.classList.remove('correct', 'incorrect');
+        if (notes.includes(keyNote)) {
+            key.classList.add(className);
+        }
+    }
+}
+
+function highlightNote(midiNote, className) {
+    const key = keyboard.querySelector(`[data-note="${midiNote}"]`);
+    if (key) {
+        key.classList.remove('correct', 'incorrect');
+        key.classList.add(className);
+    }
+}
+
+// Actions
+
+function toggleAnswer() {
+    answer ^= true;
+    if (answer) {
+        showAnswerBtn.textContent = "Hide answer";
+        if (currentExercise === 'chords') {
+            highlightCorrectChord();
+        }
+        if (currentExercise === 'scales') {
+            highlightCorrectScale();
+        }
+    } else {
+        for (let key of keys) {
+            key.classList.remove('correct', 'incorrect');
+        }
+        showAnswerBtn.textContent = "Show answer";
+    }
+}
+
+function updateUI() {
+
+    if (currentExercise) {
+        startChordsBtn.style.display = 'none';
+        startScalesBtn.style.display = 'none';
+        stopExerciseBtn.style.display = 'inline-block';
+        showAnswerBtn.style.display = 'inline-block';
+
+        if (currentExercise === 'chords' && currentChord) {
+            exerciseDisplay.textContent = `Play the ${currentChord.root} ${currentChord.type} chord`;
+        } else if (currentExercise === 'scales' && currentScale ) {
+            exerciseDisplay.textContent = `Play the ${currentScale.root} ${currentScale.type} scale`;
+        }
+    } else {
+        startChordsBtn.style.display = 'inline-block';
+        startScalesBtn.style.display = 'inline-block';
+        stopExerciseBtn.style.display = 'none';
+        showAnswerBtn.style.display = 'none';
+        exerciseDisplay.textContent = '';
+    }
+}
+
+updateUI();
+
+// Chord maker
+
+function populateChordSelect() {
+    const select = document.getElementById('chord-list');
+    select.innerHTML = '<option value="">Off</option>' + 
+        Object.entries(chordPatterns)
+            .filter(([key]) => isNaN(key) || parseInt(key) > 11)
+            .map(([value, text]) => `<option value="${value}">${text}</option>`)
+            .join('');
+}
+
+let chordMode = "Off";
+
+function detectChordSelection() {
+    const select = document.getElementById('chord-list');
+    select.addEventListener('change', function() {
+        if (this.value !== '') {
+            chordMode = this.value.split(',');
+            // playChord(this.value.split(','));
+        } else {
+            chordMode = "Off";
+        }
+    });
+}
+
+function playChord(intervals) {
+    if (activeNotes.length === 1) {
+        console.log("hey ", activeNotes);
+    }
+}
+
+populateChordSelect();
+detectChordSelection();

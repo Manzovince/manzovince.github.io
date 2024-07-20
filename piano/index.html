@@ -7,33 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Styles -->
     <link rel="stylesheet" href="./styles.css">
-    <title>VM / Piano chords</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <!-- Title -->
+    <title>Piano training</title>
 </head>
 
-<!-- 
-
-Ideas
-
-- Séléction / Détéction de la gamme
-- Entrainement note cachée + quizz
-- Entrainement interval + quizz
-- Entrainement note + quizz
-- Suggestion de prochains accords
-- Couleurs d'ambiance en fonction des notes
-    - Couleur - Gamme / Type d'accord
-    - Saturation - Velocité ou Rythme ?
-    - Lightness - Grave à Aigu
-- 
-
--->
-
 <body>
-    <div id="note-color"></div>
-    <div id="chord-display"></div>
-    <div id="intervals-display"></div>
-    <div id="note-display"></div>
-    <div id="piano-container">
-        <div id="piano"></div>
+    <div id="informations">
+        <div id="chord"></div>
+        <div id="notes"></div>
+        <div id="velocity"></div>
+        <div id="intervals"></div>
+    </div>
+
+    <div>
+        <div id="exercise-container">
+            <button onclick="startExercise('chords')">Chords</button>
+            <button onclick="startExercise('scales')">Scales</button>
+            <button onclick="stopExercise()">Stop</button>
+            <button onclick="toggleAnswer()">Show Answer</button>
+            <select name="" id="chord-list"></select>
+        </div>
+        <div id="exercise-display"></div>
+    
+        <div id="keyboard"></div>
     </div>
 </body>
 
