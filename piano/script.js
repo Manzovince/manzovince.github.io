@@ -8,6 +8,7 @@ const notesDisplay = document.getElementById('notes');
 const velocityDisplay = document.getElementById('velocity');
 const intervalsDisplay = document.getElementById('intervals');
 const chordDisplay = document.getElementById('chord');
+const colorCircle = document.getElementById('color-circle');
 const keys = keyboard.getElementsByClassName('key');
 
 const exerciseDisplay = document.getElementById('exercise-display');
@@ -113,6 +114,7 @@ function noteOff(midiNote) {
     activeNotes = activeNotes.filter(n => n.midiNote !== midiNote);
     updateOutput();
     updateKeyboard();
+
     if (currentExercise === 'chords') {
         checkChord();
     } else if (currentExercise === 'scales') {
@@ -138,6 +140,12 @@ function updateOutput() {
     activeNotes.forEach(note => { velocityDisplay.textContent += note.velocity + " "; });
 
     intervalsDisplay.textContent = intervals.join('\t');
+
+    if (activeNotes.length === 0) {
+        colorCircle.style.backgroundColor = "transparent";
+    } else {
+        changeColor(activeNotes);
+    }
 }
 
 const calculateIntervals = notes => notes.slice(0, -1).map((note, i) => notes[i + 1].midiNote - note.midiNote - 1);
@@ -213,7 +221,7 @@ document.addEventListener('keyup', handleKeyUp);
 
 function handleKeyDown(event) {
     if (event.repeat) return;
-    if (keyboardMap[event.keyCode]) { noteOn(keyboardMap[event.keyCode], 50); }
+    if (keyboardMap[event.keyCode]) { noteOn(keyboardMap[event.keyCode], 127); }
 }
 
 function handleKeyUp(event) { noteOff(keyboardMap[event.keyCode]); }
@@ -427,6 +435,23 @@ function updateUI() {
 }
 
 updateUI();
+
+// Color circle
+
+function changeColor(notes) {
+    let hue = 0;
+    let saturation = 0;
+    let lightness = 50;
+
+    notes.forEach(note => { 
+        hue += Math.floor(((note.midiNote % 12) * 360) / 12);
+        saturation += Math.floor(((note.velocity % 127) * 100));
+    })
+    hue /= notes.length;
+    saturation /= notes.length;
+
+    colorCircle.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
 
 // Chord maker
 

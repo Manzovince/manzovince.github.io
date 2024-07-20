@@ -74,6 +74,19 @@ body {
 #intervals {
 }
 
+#color-circle {
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 360px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    filter: blur(200px);
+    transition: all ease-in-out 500ms;
+}
+
 
 /* Piano keyboard */
 
