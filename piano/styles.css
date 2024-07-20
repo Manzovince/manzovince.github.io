@@ -161,7 +161,8 @@ button:hover {
     background-color: hsla(35, 45%, 83%, .2);
 }
 
-select {
+#chord-list {
+    display: none;
     margin-left: 48px;
     font-size: 16px;
     color: var(--text-color);
