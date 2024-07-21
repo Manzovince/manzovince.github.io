@@ -39,40 +39,73 @@ const chordPatterns = {
     '10': 'Seventh',
     '11': 'Octave',
 
-    '0,0':'no3 7/Maj 7 (?)',
-    '0,1':'min add b9',
-    '0,2':'#9',
-    '0,3':'b Maj 7',
-    '0,4':'b 5 #11 (?)',
-    '0,5':'5 add b9',
+    '0,0':'no3 7/Maj 7 (1)',
+    '0,1':'min add ♭9',
+    '0,2':'#9 (-3 st)',
+    '0,3':'Maj 7 (1)',
+    '0,4':'5 #11 (2)',
+    '0,5':'5 add ♭9',
+    '0,6':'5 Maj 7 (1)',
+    '0,7':'#9 (inv 1)',
+    '0,8':'min add9 (2)',
+    '0,9':'no3 7/Maj 7 (1)',
+    '0,10':'no3 add ♭9',
+    '0,11':'no3 add ♭9',
+    '0,12':'no3 b9/9',
 
     '1,0':'min add 9',
     '1,1':'add 9',
-    '1,2':'min 7 (inv 1)',
-    '1,3':'Dom 7 (inv 1)',
+    '1,2':'min 7 (1)',
+    '1,3':'Dom 7 (1)',
     '1,4':'sus2',
-    '1,5':'b O5 (inv 2)',
+    '1,5':'O 5 (2)',
+    '1,6':'5 7 (1)',
+    '1,7':'add9 (2)',
+    '1,8':'min add ♭9 (2)',
+    '1,9':'no3 add 9',
+    '1,10':'no3 ♭9/9',
+    '1,11':'no3 add 9',
+    '1,12':'min add 9',
 
     '2,0':'#9',
-    '2,1':'5 7 (inv 2)',
+    '2,1':'5 7 (2)',
     '2,2':'Dim',
     '2,3':'min',
-    '2,4':'Maj (inv 2)',
+    '2,4':'Maj (2)',
     '2,5':'min 6',
+    '2,6':'min 7',
+    '2,7':'#9 (-3 st)',
+    '2,8':'min',
+    '2,9':'min add ♭9',
+    '2,10':'min add 9',
+    '2,11':'min',
+    '2,12':'#9',
 
-    '3,0':'5 Maj 7 (inv 1)',
+    '3,0':'5 Maj 7 (1)',
     '3,1':'O 5',
     '3,2':'Maj',
     '3,3':'Aug',
-    '3,4':'min (inv 2)',
+    '3,4':'min (2)',
     '3,5':'7',
+    '3,6':'Maj 7',
+    '3,7':'Maj',
+    '3,8':'add ♭9',
+    '3,9':'add 9',
+    '3,10':'#9',
+    '3,11':'Maj',
+    '3,12':'add 11',
 
-    '4,0':'5 add b9 (inv 1)',
+    '4,0':'5 add ♭9 (1)',
     '4,1':'sus4',
-    '4,2':'min (inv 1)',
-    '4,3':'Maj (inv 1)',
-    '4,4':'sus2 (inv 2)',
-    '4,5':'5 #11 (inv 1)',
+    '4,2':'min (1)',
+    '4,3':'Maj (1)',
+    '4,4':'sus2 (2)',
+    '4,5':'5 #11 (1)',
+    '4,6':'5 (1)',
+    '4,7':'5 ♭13 (1)',
+    '4,8':'5 6 (1)',
+    '4,9':'5 7 (1)',
+    '4,10':'5 Maj 7 (1)',
 
     '3,2,1': 'Maj 6',
     '2,3,1': 'min 6',
@@ -193,19 +226,30 @@ const calculateIntervals = notes => notes.slice(0, -1).map((note, i) => notes[i 
 //     return intervals;
 // }
 
+function getParenthesesContent(str) {
+    const match = str.match(/\(([^)]+)\)/);
+    return match ? match[1] : null;
+}
+
 function NotesToChordName(notes) {
     if (notes.length === 0) { return ""; }
     else if (notes.length === 1) { return noteNames[notes[0].midiNote % 12]; }
     else if (notes.length === 2) { return `${noteNames[notes[0].midiNote % 12]} + ${chordPatterns[calculateIntervals(notes) % 12]}`; }
-    else {
+    else if (notes.length === 3 || notes.length === 4) {
         intervals = calculateIntervals(notes);
         let inversion = 0;
 
+        if (getParenthesesContent(chordPatterns[intervals])) {
+            console.log(getParenthesesContent(chordPatterns[intervals]));
+            inversion = getParenthesesContent(chordPatterns[intervals]);
+        }
         if (chordPatterns[intervals] === undefined) {
             return `${noteNames[notes[inversion].midiNote % 12]} ?`;
         }
 
         return `${noteNames[notes[inversion].midiNote % 12]} ${chordPatterns[intervals]}`;
+    } else {
+        return `${noteNames[notes[inversion].midiNote % 12]}`;
     }
 }
 
