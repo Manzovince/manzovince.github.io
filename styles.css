@@ -271,31 +271,47 @@ header {
 /* Main */
 
 main {
-    display: none;
+    /* display: none; */
 }
 
 .cell {
-    height: 26rem;
+    min-height: 26rem;
     border: solid 1px var(--text-color);
     padding: 64px;
     margin-top: -1px;
     margin-left: -1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tag {
+    font-size: 16px;
+    padding: 4px 8px;
+    border: solid 1px var(--text-color);
+    border-radius: 100px;
 }
 
 /* Introduction */
 
 #introduction {
     padding: clamp(32px, 5vw, 64px);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 }
 
 #intro-1 {
-    grid-column: 1 / 3;
-    display: flex;
-    align-items: end;
-    font-size: 32px;
+    justify-content: end;
+    font-size: clamp(24px, 6vw, 32px);
     font-weight: 200;
+}
+
+@media only screen and (min-width:768px) {
+    #introduction {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    #intro-1 {
+        grid-column: 1 / 3;
+    }
 }
 
 #intro-2 {
@@ -309,6 +325,7 @@ main {
 #intro-3 {
     grid-column: 1 / 4;
     border-bottom-right-radius: 240px;
+    align-items: end;
 }
 
 .intro-tag-container {
@@ -319,6 +336,9 @@ main {
 .intro-tag {
     width: 1000px;
     height: 25%;
+    padding: 32px 0;
+    font-size: 24px;
+    font-weight: 300;
     border: solid 1px var(--text-color);
     display: flex;
     justify-content: center;
@@ -330,4 +350,17 @@ main {
 .intro-tag:hover {
     background-color: var(--text-color);
     color: var(--bg-color);
+}
+
+.project-content {
+    width: 100%;
+}
+
+.project-title {
+    font-family: "Abyssinica SIL", serif;
+    font-size: 48px;
+}
+
+.project-desc {
+    font-size: 24px;
 }

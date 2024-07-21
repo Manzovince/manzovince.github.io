@@ -38,18 +38,52 @@ const chordPatterns = {
     '9': 'minor Seventh',
     '10': 'Seventh',
     '11': 'Octave',
-    '3,2': 'Maj',
-    '2,3': 'min',
-    '2,2': 'Dim',
-    '3,3': 'Aug',
-    '1,4': 'sus2',
-    '4,1': 'sus4',
-    '3,2,1': 'Maj 6th',
-    '2,3,1': 'min 6th',
-    '3,2,2': 'Dom 7th',
-    '3,2,3': 'Maj 7th',
-    '2,3,2': 'min 7th',
-    '2,2,2': 'Dim 7th',
+
+    '0,0':'no3 7/Maj 7 (?)',
+    '0,1':'min add b9',
+    '0,2':'#9',
+    '0,3':'b Maj 7',
+    '0,4':'b 5 #11 (?)',
+    '0,5':'5 add b9',
+
+    '1,0':'min add 9',
+    '1,1':'add 9',
+    '1,2':'min 7 (inv 1)',
+    '1,3':'Dom 7 (inv 1)',
+    '1,4':'sus2',
+    '1,5':'b O5 (inv 2)',
+
+    '2,0':'#9',
+    '2,1':'5 7 (inv 2)',
+    '2,2':'Dim',
+    '2,3':'min',
+    '2,4':'Maj (inv 2)',
+    '2,5':'min 6',
+
+    '3,0':'5 Maj 7 (inv 1)',
+    '3,1':'O 5',
+    '3,2':'Maj',
+    '3,3':'Aug',
+    '3,4':'min (inv 2)',
+    '3,5':'7',
+
+    '4,0':'5 add b9 (inv 1)',
+    '4,1':'sus4',
+    '4,2':'min (inv 1)',
+    '4,3':'Maj (inv 1)',
+    '4,4':'sus2 (inv 2)',
+    '4,5':'5 #11 (inv 1)',
+
+    '3,2,1': 'Maj 6',
+    '2,3,1': 'min 6',
+    '3,2,2': 'Dom 7',
+    '3,2,3': 'Maj 7',
+    '2,3,2': 'min 7',
+    '2,2,2': 'Dim 7',
+    '3,2,6': '9',
+    '3,2,9': '11',
+    '3,2,3,2': '7/9',
+    '2,3,2,3': 'min 7/9',
 };
 
 const scalePatterns = {
@@ -167,7 +201,9 @@ function NotesToChordName(notes) {
         intervals = calculateIntervals(notes);
         let inversion = 0;
 
-        console.log(notes);
+        if (chordPatterns[intervals] === undefined) {
+            return `${noteNames[notes[inversion].midiNote % 12]} ?`;
+        }
 
         return `${noteNames[notes[inversion].midiNote % 12]} ${chordPatterns[intervals]}`;
     }
