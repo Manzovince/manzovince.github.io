@@ -228,6 +228,7 @@ const calculateIntervals = notes => notes.slice(0, -1).map((note, i) => notes[i 
 
 function getParenthesesContent(str) {
     const match = str.match(/\(([^)]+)\)/);
+    console.log(str, match);
     return match ? match[1] : null;
 }
 
@@ -235,12 +236,15 @@ function NotesToChordName(notes) {
     if (notes.length === 0) { return ""; }
     else if (notes.length === 1) { return noteNames[notes[0].midiNote % 12]; }
     else if (notes.length === 2) { return `${noteNames[notes[0].midiNote % 12]} + ${chordPatterns[calculateIntervals(notes) % 12]}`; }
-    else if (notes.length === 3 || notes.length === 4) {
+    else {
         intervals = calculateIntervals(notes);
         let inversion = 0;
 
+        if (chordPatterns[intervals] === undefined) {
+            return `${noteNames[notes[inversion].midiNote % 12]}`;
+        }
+
         if (getParenthesesContent(chordPatterns[intervals])) {
-            console.log(getParenthesesContent(chordPatterns[intervals]));
             inversion = getParenthesesContent(chordPatterns[intervals]);
         }
         if (chordPatterns[intervals] === undefined) {
@@ -248,8 +252,6 @@ function NotesToChordName(notes) {
         }
 
         return `${noteNames[notes[inversion].midiNote % 12]} ${chordPatterns[intervals]}`;
-    } else {
-        return `${noteNames[notes[inversion].midiNote % 12]}`;
     }
 }
 
